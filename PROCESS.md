@@ -35,6 +35,11 @@ Datastructuren:
         - Waardevermeerdering
         - rentepercentage enkel
         - extra meters
+
+        functie totalprice
+            * extra meters x rentepercentage -> rentepercentage x waarde woning = totalprice
+        functie extra meters
+            * 
     - Waterobject
         - bezet (bool)
         - Locatie beschikbaar
