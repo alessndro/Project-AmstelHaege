@@ -110,21 +110,21 @@ def main():
             for i in range(house_size):
                 name = "S" + count
                 small_house = House(name=name, size=small, start_value=285.000, obligated_space=2, rate=0.03, length=8, width=8)
-                list_of_objects += small_house
+                list_of_objects.append(small)
                 count += 1
         if house_sort == "medium":
             count = 0
             for i in range(house_size):
                 name = "M" + count
-                small = House(name=name, size=medium, start_value=399.000, obligated_space=3, rate=0.04, length=11, width=7)
-                list_of_objects += medium
+                large = House(name=name, size=medium, start_value=399.000, obligated_space=3, rate=0.04, length=11, width=7)
+                list_of_objects.append(medium)
                 count += 1
         if house_sort == "large":
             count = 0
             for i in range(house_size):
                 name = "L" + count
-                small = House(name=name, size=large, start_value=610.000, obligated_space=6, rate=0.06, length=12, width=10)
-                list_of_objects += large
+                large = House(name=name, size=large, start_value=610.000, obligated_space=6, rate=0.06, length=12, width=10)
+                list_of_objects.append(large)
         return list_of_objects
 
 
