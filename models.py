@@ -1,5 +1,6 @@
 class House:
-    def __init__(self, size, start_value, obligated_space, rate, length, width):
+    def __init__(self, name, size, start_value, obligated_space, rate, length, width):
+        self.name = name
         self.size = size
         self.start_value = start_value
         self.obligated_space = obligated_space
