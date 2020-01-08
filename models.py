@@ -8,7 +8,13 @@ class House:
         self.rate = rate
         self.length = length
         self.width = width
-        self.placed = placed
+        self.placed = False
+        self.bottom_left = None
+        self.bottom_right = None
+        self.top_right = None
+        self.top_left = None
+        self.total_value = None
+        self.extra_space = 0
 
     def location(self, bottom_left):
         self.bottom_left = bottom_left
@@ -18,7 +24,9 @@ class House:
         return (bottom_left, top_right)
 
     def extra_space(self):
+        # bereken kortste afstand tot volgende huis, bereken of dit groter is dan de minimale vereisten
         pass
+        
     
     def totalprice(self, extra_meters):
         total_rate = self.rate * extra_meters + 1
@@ -28,6 +36,9 @@ class House:
     def addedvalue(self):
         self.added_value = total_price - start_value
         return self.added_value
+
+    def __str__(self):
+        return (self.name, self.size, self.placed, self.total_price)
 
 
 class Water:

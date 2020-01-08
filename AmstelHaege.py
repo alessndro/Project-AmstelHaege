@@ -3,6 +3,7 @@ from random import seed
 from random import random
 import _random
 import math
+import csv
 
 # Import the necessary packages and modules vfor mathlibplot
 import matplotlib.pyplot as plt
@@ -14,6 +15,7 @@ ratio_medium = 0,25
 ratio_large = 0,15
 maximum_height = 180
 maximum_width = 160
+width_length_small_house = 8
 
 def main():
     
@@ -56,10 +58,6 @@ def main():
     
     if water.bottem_left[0] <= top_right[0] <= water.bottem_right[0] and water.top_left[1] <= top_right[1] <= water.bottem_left[1]:   
         break
-        
-
-    
-        
 
     # check if given cordinates overlap houses/obligated space
     for house in houses:
@@ -130,20 +128,40 @@ def main():
 
     def nodes_creator(house_sort)
     
-    
-    for house_nodes in list_of_objects:
-        count = 0
-        if house_sort == small:
-            bottem_left1 = bottem_left
-            bottem_left2 = bottem_left
-            
-            for i in range(8):
-                bottem_left1[1] + i = "node" + count
-            for i in range(8):
-                bottem_left1[0] + i = "node" + count
-            for i in range(8):
-                bottem_left2[1] + i = "node" + count
+        for house_nodes in list_of_objects:
+            count = 0
+            if house_sort == small:
+                bottem_left1 = bottem_left
+                bottem_left2 = bottem_left
                 
+                for i in range(width_length_small_house):
+                    bottem_left1[1] + i = "node" + count
+                for i in range(width_length_small_house):
+                    bottem_left1[0] + i = "node" + count
+                for i in range(width_length_small_house):
+                    bottem_left2[1] + i = "node" + count
+
+
+
+    def write_solution():
+        # if file does not exist create
+        # if file exists, open
+        # write down number of the solution
+        # if total_value map higher than last solution, delete all info last solution except total_value and picture
+        # for house in solution write name, coordinates, total_value, extra space per house, save picture graph
+        # write total of total_value map
+        # else write total_value of map
+        # close file
+        pass
+
+    def save_picture():
+        # saves picture of graph
+        pass
+    
+    def read_water_files(file):
+        pass
+                
+    
                 
             
         
