@@ -22,16 +22,13 @@ def main():
     
     # ask user for number of houses to be placed
     while True:
-        number_of_houses = int(input("What are the amount of Houses?"))
+        number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
 
-        if number_of_houses > 0 and number_of_houses < 60:
+        if number_of_houses == 20 or number_of_houses == 40 or number_of_houses == 60
             break
 
     # determine division houses
     number_small, number_medium, number_large = ratio_houses(number_of_houses)
-
-    # make visualisation
-
 
     # create list of objects
     small_houses = create_house_object(number_small, "small")
@@ -43,62 +40,126 @@ def main():
     all_houses[small] = small_houses
     all_houses[medium] = medium_houses
     all_houses[large] = large_houses
-    
-    for house in all_houses[large]
-    # returns a tuple of a cordinate x,y bottom left of house
-    bottem_left = randomizer()
-    house.location(bottem_left)
 
-    # vul object huis in met bottem_left coordinaten
-    def fill_information_house(bottem_left, house)
-    '''Vult alle coordinaten in van het object op basis van het random punt dat is gekozen ''' 
-        if house_size == small:
-            count = 0
-            for i in range(8):
-                for j in range(8):
-                    bottem_left(: + i ,: + j) = "s" + count
-                    count += 1
+    for house in all_houses[large]
+        algoritme(house)
+    
+    for house in all_houses[medium]
+        algoritme(house)
+    
+    for house in all_houses[small]
+        algoritme(house)
+
+    #alle huizen zijn nu geplaatst
+    #visulisatie
+    #oplossing opslaan
+    
+
+    
+    def algoritme(house):
+    
+        while True:
+
+         # returns a tuple of a cordinate x,y bottom left of house
+        bottom_left = randomizer()
+        house.location(bottom_left)
+
+        # Check of het huis geplaatst kan worden
+        if place_house(house) == True:
+            # als huis geplaatst mag worden, plaats huis
+            house.placed = True
+            break
+
 
     def place_house(selected_house):
     '''Bepaald of een huis op de gekozen locatie geplaatst kan worden '''
     selected_house = house
-    # check if bottomleft, bottomright, topleft and top right of house overlap water
-    if water.bottem_left[0] <= bottem_left[0] <= water.bottem_right[0] and water.top_left[1] <= bottom_left[1] <= water.bottem_left[1]:   
-        break
+    # check if bottom left, bottom right, top left and top right of house overlap water
+    if water.bottom_left[0] <= house.bottom_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_left[1] <= water.bottom_left[1]:   
+        return False
         
-    if water.bottem_left[0] <= bottem_right[0] <= water.bottem_right[0] and water.top_left[1] <= bottom_right[1] <= water.bottem_left[1]:   
-        break
-    
-    if water.bottem_left[0] <= top_left[0] <= water.bottem_right[0] and water.top_left[1] <= top_left[1] <= water.bottem_left[1]:   
-        break
-    
-    if water.bottem_left[0] <= top_right[0] <= water.bottem_right[0] and water.top_left[1] <= top_right[1] <= water.bottem_left[1]:   
-        break
+    if water.bottom_left[0] <= house.bottom_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_right[1] <= water.bottom_left[1]:   
+        return False
 
-    # check if given cordinates overlap houses/obligated space
-    for house in houses:
-        # add obligated space with surface of house
+    if water.bottom_left[0] <= house.top_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_left[1] <= water.bottom_left[1]:   
+        return False
+
+    if water.bottom_left[0] <= house.top_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_right[1] <= water.bottom_left[1]:   
+        return False
+
+    # check if given cordinates of new house overlaps with houses and obligated space
+    for houseplaced in houses.placed == "yes":
+        # add obligated space with surface of house dependant on size
         if house.size == "small":
-            houseandgarden_bottom_left[0] += 2
-            houseandgarden_bottom_right -= 2
-            houseandgarden_bottom_right[0] += 2
-            houseandgarden_top_left[1] += 2
-
-            if houseandgarden_bottem_left[0] <= bottem_left[0] <= houseandgarden_bottom_right[1] and
-            houseandgarden.top_left[1] <= bottom_left[1] <= houseandgarden.bottem_left[1]:
-                pass
+            # calculate bottom left of house and obligatory space/garden
+            houseandgarden_bottom_left[0] = houseplaced.bottom_left[0] - 2
+            houseandgarden_bottom_left[1] = houseplaced.bottom_left[1] - 2
+            # calculate bottom right of house and obligatory space/garden
+            houseandgarden_bottom_right[0] = housplaced.bottom_right[0] + 2
+            houseandgarden_bottom_right[1] = houseplaced.bottom_right[1] - 2
+            # calculate top left of house and obligatory space/garden
+            houseandgarden_top_left[0] = houseplaced.top_left[0] - 2
+            houseandgarden_top_left[1] = houseplaced.top_left[1] + 2
+            
+            # check whether both x and y cordinates of all four corners of new house not inside already placed house and garden
+            if houseandgarden_bottom_left[0] <= house.bottom_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_left[1] <= houseandgarden.bottom_left[1]:
+                return False
+            if houseandgarden_bottom_left[0]  <= house.bottom_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
+            if houseandgarden_bottom_left[0]  <= house.top_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_left[1] <= houseandgarden.bottom_left[1]:   
+                return False
+            if houseandgarden_bottom_left[0]  <= house.top_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
         
         if house.size == "medium":
-            bottom_left[0] - 3
-            bottem_left[1] + 3
+            # calculate bottom left of house and obligatory space/garden
+            houseandgarden_bottom_left[0] = houseplaced.bottom_left[0] - 3
+            houseandgarden_bottom_left[1] = houseplaced.bottom_left[1] - 3
+            # calculate bottom right of house and obligatory space/garden
+            houseandgarden_bottom_right[0] = houseplaced.bottom_right[0] + 3
+            houseandgarden_bottom_right[1] = houseplaced.bottom_right[1] - 3
+            # calculate top left of house and obligatory space/garden
+            houseandgarden_top_left[0] = houseplaced.top_left[0] - 3
+            houseandgarden_top_left[1] = houseplaced.top_left[1] + 3
+
+            # check whether both x and y cordinates of all four corners of new house not inside already placed house and garden
+            if houseandgarden_bottom_left[0] <= house.bottom_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_left[1] <= houseandgarden.bottom_left[1]:
+                return False
+
+            if houseandgarden_bottom_left[0]  <= house.bottom_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
+
+            if houseandgarden_bottom_left[0]  <= house.top_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_left[1] <= houseandgarden.bottom_left[1]:   
+                return False
+
+            if houseandgarden_bottom_left[0]  <= house.top_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
+
         if house.size == "large":
-            bottom_left[0] - 6
-            bottem_left[1] + 6
+            # bottom left of house and obligatory space/garden
+            houseandgarden_bottom_left[0] = houseplaced.bottom_left[0] - 6
+            houseandgarden_bottom_left[1] = houseplaced.bottom_left[1] - 6
+            # bottom right of house and obligatory space/garden
+            houseandgarden_bottom_right[0] = houseplaced.bottom_right[0] + 6
+            houseandgarden_bottom_right[1] = houseplaced.bottom_right[1] - 6
+            # top left of house and obligatory space/garden
+            houseandgarden_top_left[0] = houseplaced.top_left[0] - 6
+            houseandgarden_top_left[1] = houseplaced.top_left[1] + 6
+        
+            # check whether both x and y cordinates of all four corners of new house not inside already placed house and garden
+            if houseandgarden_bottom_left[0] <= house.bottom_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_left[1] <= houseandgarden.bottom_left[1]:
+                return False
 
-    for small_house in number_small:
-        small_house = House()
+            if houseandgarden_bottom_left[0]  <= house.bottom_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.bottom_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
 
-    for medium_house in number_medium
+            if houseandgarden_bottom_left[0]  <= house.top_left[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_left[1] <= houseandgarden.bottom_left[1]:   
+                return False
+
+            if houseandgarden_bottom_left[0]  <= house.top_right[0] <= houseandgarden_bottom_right[0] and houseandgarden.top_left[1] <= house.top_right[1] <= houseandgarden.bottom_left[1]:   
+                return False
+
+        return True
 
     def randomizer():
         ''' Generates a random x and y value'''
@@ -142,48 +203,34 @@ def main():
                 list_of_objects.append(large)
         return list_of_objects
 
+    # vul object huis in met bottom_left coordinaten
+    def fill_information_house(bottom_left, house)
+    '''Vult alle coordinaten in van het object op basis van het random punt dat is gekozen ''' 
+        if house_size == small:
+            count = 0
+            for i in range(8):
+                for j in range(8):
+                    bottom_left(: + i ,: + j) = "s" + count
+                    count += 1
+
     def nodes_creator(house_sort)
     
         for house_nodes in list_of_objects:
             count = 0
             if house_sort == small:
-                bottem_left1 = bottem_left
-                bottem_left2 = bottem_left
+                bottom_left1 = bottom_left
+                bottom_left2 = bottom_left
                 
                 for i in range(width_length_small_house):
-                    bottem_left1[1] + i = "node" + count
+                    bottom_left1[1] + i = "node" + count
+                for i in range(width_
+
+            length_small_house):
+                    bottom_left1[0] + i = "node" + count
                 for i in range(width_length_small_house):
-                    bottem_left1[0] + i = "node" + count
-                for i in range(width_length_small_house):
-                    bottem_left2[1] + i = "node" + count
+                    bottom_left2[1] + i = "node" + count
 
 
 
     def write_solution():
-        # if file does not exist create
-        # if file exists, open
-        # write down number of the solution
-        # if total_value map higher than last solution, delete all info last solution except total_value and picture
-        # for house in solution write name, coordinates, total_value, extra space per house, save picture graph
-        # write total of total_value map
-        # else write total_value of map
-        # close file
         pass
-
-    def save_picture():
-        # saves picture of graph
-        pass
-    
-    def read_water_files(file):
-        pass
-                
-    #vis.visualise(test_graph, 'data lalalla jason file)
-    
-                
-            
-        
-
-if __name__ == "__main__":
-    main()
-
-
