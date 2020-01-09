@@ -4,8 +4,9 @@ from random import random
 import _random
 import math
 import csv
+#from coede.visualitastion import visualise as vis
 
-# Import the necessary packages and modules vfor mathlibplot
+# Import the necessary packages and modules for matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -30,8 +31,7 @@ def main():
     number_small, number_medium, number_large = ratio_houses(number_of_houses)
 
     # make visualisation
-    plt.plot([x <= 160], [y <=180])
-    plt.show()
+
 
     # create list of objects
     small_houses = create_house_object(number_small, "small")
@@ -39,13 +39,29 @@ def main():
     large_houses = create_house_object(number_large, "large")
     
     # save lists in dictionary
+    # all_houses = {}
     all_houses[small] = small_houses
     all_houses[medium] = medium_houses
     all_houses[large] = large_houses
     
+    for house in all_houses[large]
     # returns a tuple of a cordinate x,y bottom left of house
     bottem_left = randomizer()
+    house.location(bottem_left)
 
+    # vul object huis in met bottem_left coordinaten
+    def fill_information_house(bottem_left, house)
+    '''Vult alle coordinaten in van het object op basis van het random punt dat is gekozen ''' 
+        if house_size == small:
+            count = 0
+            for i in range(8):
+                for j in range(8):
+                    bottem_left(: + i ,: + j) = "s" + count
+                    count += 1
+
+    def place_house(selected_house):
+    '''Bepaald of een huis op de gekozen locatie geplaatst kan worden '''
+    selected_house = house
     # check if bottomleft, bottomright, topleft and top right of house overlap water
     if water.bottem_left[0] <= bottem_left[0] <= water.bottem_right[0] and water.top_left[1] <= bottom_left[1] <= water.bottem_left[1]:   
         break
@@ -101,6 +117,7 @@ def main():
         return (number_small, number_medium, number_large)
 
     def create_house_object(house_size, house_sort):
+        '''Creates all the objects for a particular house and returns a list'''
         list_of_objects = []
 
         if house_sort == "small":
@@ -124,7 +141,6 @@ def main():
                 large = House(name=name, size=large, start_value=610.000, obligated_space=6, rate=0.06, length=12, width=10)
                 list_of_objects.append(large)
         return list_of_objects
-
 
     def nodes_creator(house_sort)
     
@@ -161,6 +177,7 @@ def main():
     def read_water_files(file):
         pass
                 
+    #vis.visualise(test_graph, 'data lalalla jason file)
     
                 
             

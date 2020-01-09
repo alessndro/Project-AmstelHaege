@@ -83,7 +83,13 @@ situatie 60 huizen:
     large = 9 x 12 x 10 = 1.080
     totaal = 4.539
     
+Dinsdag 7 januari 2020
+Technische aspecten besproken, objecten aangemaakt, begonnen met schrijven van het benodigde algoritme
+Random function afgemaakt, we hebben gekozen voor een soort grid systeem op basis van x,y coordinaten afgerond op hele getallen.
+Omdat de hoeken van een vrijstand eigenlijk afgerond zijn (pythagoras) bepalen wij nu dat het mogelijk is een huis te plaatsen op
+datzelfde exacte punt omdat hier in de werkelijkheid geen verplichte vrijstand meer is (afstand is groter) maar we dit nog niet
+visualiseren omdat dit momenteel makkelijker te programmeren moet zijn
 
-
-
-
+Woensdag 8 januari 2020
+Voortgangs gesprek en presentaties gehad, we wilde het probleem ook wiskundig oplossen ons werd aangeraden om dit (nog) niet te doen en het probleem eerst echt random aan te pakken. Ons idee was om eerst te beginnen met de grote huizen, maar dit is een geinformeerde random. één van de TA's was het hier niet mee eens en vind dat dit ook echt random zou moeten zijn.
+Begonnen met het verdiepen in matplotlib om data te kunnen visualiseren, functies geschreven voor het maken van de objecten op basis van de gegeven input. Daarnaast extra functies geschreven voor de house class om de waarde van de woning te kunnen bepalen, en de locaties die bij de woning horen. Naam attribuut toegevoegd omdat we de berekende afstand tot andere huizen al willen kunnen vastleggen bij het plaatsen van de woning zodat er uiteindelijk minder berekeningen dubbel uitgevoerd hoeven te worden. Daarnaast zijn we begonnen met de functie om te bepalen of een huis geplaatst mag worden

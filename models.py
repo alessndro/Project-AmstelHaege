@@ -21,7 +21,15 @@ class House:
         self.bottom_right = ((bottom_left[0] + width), bottom_left[1]) 
         self.top_left = (bottom_left[0], (bottom_left[1] + length))
         self.top_right = ((bottom_left[0] + width), (bottom_left[1] + length))
-        return (bottom_left, top_right)
+    
+    def compared_space(self, neighbor)
+        '''Berekend de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op'''
+        neighbors = {}
+
+        #FUNCTIE AFSTAND BEREKENEN TOT ANDER HUIS
+        
+        neighbors[neighbor] = afstand
+        pass
 
     def extra_space(self):
         # bereken kortste afstand tot volgende huis, bereken of dit groter is dan de minimale vereisten
