@@ -22,7 +22,7 @@ class House:
         self.top_left = (bottom_left[0], (bottom_left[1] + length))
         self.top_right = ((bottom_left[0] + width), (bottom_left[1] + length))
     
-    def compared_space(self, neighbor)
+    def compared_space(self, neighbor):
         '''Berekend de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op'''
         neighbors = {}
 
