@@ -28,7 +28,7 @@ def write_solution_down(total_value_map, all_houses, number_of_houses, all_water
             for size in all_houses:
                 for house in size:
                     write.writerow(["map:", chosen_map, "number of houses", number_of_houses,
-                                    "solution number:", solution_sixty, "size house: ", house.size, "coordinates: ", house.coordinates,
+                                    "solution:", solution_sixty, "size house: ", house.size, "coordinates: ", house.coordinates,
                                     "extra_space: ", house.extra_space])
             write_progress(number_of_houses, solution_twenty, total_value_map)
 
@@ -37,12 +37,18 @@ def write_solution_down(total_value_map, all_houses, number_of_houses, all_water
 
 def read_previous_solutions(chosen_map, number_of_houses):
     
+    highest_total_value_map = 0
+    solution = -1
     with open ('progress.csv', 'r') as file:
         reader = csv.reader(file)
         for row in reader:
-            pass
+            if chosen_map == row[1] and number_of_houses == row[0]:
+                if row[3] > highest_total_value_map
+                highest_total_value_map = row[3]
+                solution = row[2]
 
-    return highest_total_value_map
+    reader.close()
+    return highest_total_value_map, solution
 
 def write_progress(number_of_houses, solution, total_value_map):
 
@@ -50,7 +56,10 @@ def write_progress(number_of_houses, solution, total_value_map):
         writer = csv.writer(file)
 
         if number_of_houses == 20:
-            write.writerow([solution, total_value_map])
+            write.writerow([number_of_houses, chosen_map, solution, total_value_map])
+        if number_of_houses == 40:
+
+        if number_of_houses == 60:
     writer.close()
 
 

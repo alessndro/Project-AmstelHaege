@@ -4,19 +4,18 @@ from random import random
 import _random
 import math
 import csv
-#from coede.visualitastion import visualise as vis
 
 # Import the necessary packages and modules for matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
 #constants
-ratio_small = 0.6
-ratio_medium = 0.25
-ratio_large = 0.15
-maximum_height = 180
-maximum_width = 160
-width_length_small_house = 8
+RATIO_SMALL = 0.6
+RATIO_MEDIUM = 0.25
+RATIO_LARGE = 0.15
+MAXIMUM_HEIGHT = 180
+MAXIMUM_WIDTH = 160
+WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
     
@@ -46,7 +45,6 @@ def main():
     for item in all_houses.values():
         for house in item:
             algoritme(house, all_houses)
-            print("NAAM EN GEPLAATS PLUS CORDINAAT", house.name, house.placed, house.bottom_left)
         
     # bereken alle afstanden tot alle huizen
     for item in all_houses.values():
@@ -61,8 +59,6 @@ def main():
 
     print(total_value_map)
         
-
-
 
 def algoritme(house, all_houses):
 
@@ -94,6 +90,22 @@ def place_house(selected_house, all_houses):
 
     # if water.bottom_left[0] <= house.top_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_right[1] <= water.bottom_left[1]:   
     #     return False
+
+    # check if bottom left, bottom right, top left and top right of house inside map
+    if house.size == "small":
+        0 <= x van alle hoeken <= 178
+        0 <= y van alle hoeken<= 158
+
+
+    if house.size =="medium":
+        0 <= x van alle hoeken <= 177
+        0 <= y van alle hoeken<= 157
+
+
+    if house.size == "large":
+         0 <= x van alle hoeken <= 174
+        0 <= y van alle hoeken<= 154
+
 
     for item in all_houses.values():
         for current_house_to_check in item:
@@ -170,15 +182,15 @@ def randomizer():
     ''' Generates a random x and y value'''
     # Daniel wil seed later gebruiken, zorgt voor zelfde uitkomst okal random
     # Kiara eandgarden_wil math.floor verwijderen voor exacte cordinaten ipv grid
-    random_x = math.floor(random()*maximum_height)
-    random_y = math.floor(random()*maximum_width)
+    random_x = math.floor(random()*MAXIMUM_HEIGHT)
+    random_y = math.floor(random()*MAXIMUM_WIDTH)
     return (random_x, random_y)
 
 def ratio_houses(number_of_houses):
     '''Determines number of houses per size house '''
-    small = int(ratio_small * number_of_houses)
-    medium = int(ratio_medium * number_of_houses)
-    large = int(ratio_large * number_of_houses)
+    small = int(RATIO_SMALL * number_of_houses)
+    medium = int(RATIO_MEDIUM * number_of_houses)
+    large = int(RATIO_LARGE * number_of_houses)
     
     return (small, medium, large)
 
