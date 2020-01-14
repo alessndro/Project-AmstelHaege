@@ -19,7 +19,7 @@ WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
     
-    seed(3)
+    seed(5)
     # ask user for number of houses to be placed
     while True:
         number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
@@ -49,6 +49,7 @@ def main():
     # bereken alle afstanden tot alle huizen
     for item in all_houses.values():
         for house in item:
+            print(house)
             bereken(house, all_houses)
 
     total_value_map = 0
@@ -64,10 +65,17 @@ def algoritme(house, all_houses):
 
     while True:
 
-        # returns a tuple of a cordinate x,y bottom left of house
-        bottom_left = randomizer()
-        house.location(bottom_left)
+        while True:
+            # returns a tuple of a cordinate x,y bottom left of house
+            bottom_left = randomizer()
 
+            # check if bottom left, bottom right, top left and top right of house inside map
+            
+            if bottom_left[0] < MAXIMUM_WIDTH - house.width or bottom_left[1] < MAXIMUM_HEIGHT - house.length:
+                house.location(bottom_left)
+                break
+        
+        
         # Check of het huis geplaatst kan worden
         if place_house(house, all_houses) == True:
             # als huis geplaatst mag worden, plaats huis
@@ -75,38 +83,26 @@ def algoritme(house, all_houses):
             break
 
 
-def place_house(selected_house, all_houses):
+def place_house(selected_house, all_houses, water):
     '''Bepaald of een huis op de gekozen locatie geplaatst kan worden '''
     house = selected_house
     # check if bottom left, bottom right, top left and top right of house overlap water
-    # if water.bottom_left[0] <= house.bottom_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_left[1] <= water.bottom_left[1]:   
-    #     return False
+    
+    # for water in waters
+        # if water.bottom_left[0] <= house.bottom_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_left[1] <= water.bottom_left[1]:   
+        #     return False
         
-    # if water.bottom_left[0] <= house.bottom_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_right[1] <= water.bottom_left[1]:   
-    #     return False
+        # if water.bottom_left[0] <= house.bottom_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.bottom_right[1] <= water.bottom_left[1]:   
+        #     return False
 
-    # if water.bottom_left[0] <= house.top_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_left[1] <= water.bottom_left[1]:   
-    #     return False
+        # if water.bottom_left[0] <= house.top_left[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_left[1] <= water.bottom_left[1]:   
+        #     return False
 
-    # if water.bottom_left[0] <= house.top_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_right[1] <= water.bottom_left[1]:   
-    #     return False
+        # if water.bottom_left[0] <= house.top_right[0] <= water.bottom_right[0] and water.top_left[1] <= house.top_right[1] <= water.bottom_left[1]:   
+        #     return False
+
 
     # check if bottom left, bottom right, top left and top right of house inside map
-    if house.size == "small":
-        0 <= x van alle hoeken <= 178
-        0 <= y van alle hoeken<= 158
-
-
-    if house.size =="medium":
-        0 <= x van alle hoeken <= 177
-        0 <= y van alle hoeken<= 157
-
-
-    if house.size == "large":
-         0 <= x van alle hoeken <= 174
-        0 <= y van alle hoeken<= 154
-
-
     for item in all_houses.values():
         for current_house_to_check in item:
              # check if given cordinates of new house overlaps with houses and obligated space
@@ -221,60 +217,77 @@ def create_house_object(house_size, house_sort):
             count += 1
     return list_of_objects
 
-# # vul object huis in met bottom_left coordinaten
-# def fill_information_house(bottom_left, house):
-#     '''Vult alle coordinaten in van het object op basis van het random punt dat is gekozen ''' 
-#     if house_size == small:
-#         count = 0
-#         for i in range(8):
-#             for j in range(8):
-#                 bottom_left(: + i ,: + j) = "s" + count
-#                 count += 1
+#def create_water_object(map):
+   # if map == "1":
+    # waters = Water(map=1, top_right=(32,180), top_left=(0,180), bottom_right=(32,0), bottom_left=(0.0))
+   # if map == "2":
+   # water = []
+    # water0 = Water(map=2, top_right=(135,180), top_left=(0,180), bottom_right=(135,128), bottom_left=(0,128))
+    # water1 = Water(map=2, top_right=(160,180), top_left=(135,128), bottom_right=(160,128), bottom_left=(135,128))
+    # water2 = Water(map=2, top_right=(32,55), top_left=(0,55), bottom_right=(32,0), bottom_left=(0,0))
+    # water3 = Water(map=2, top_right=(160,32), top_left=(135,32), bottom_right=(160,0), bottom_left=(135,0))
+    # waters.appned(water0, water1, water2, water3)
+   # if map == "3":
+    # waters = Water(map=3, top_right=(116,130), top_left=(44,130), bottom_right=(116,50), bottom_left=(44,50))
 
 def bereken(selected_house, placed_houses):
 
+    count = 0
+    counter_statement = 0
+
     for item in placed_houses.values():
         for placed_house in item:
+            
+            print("dit is de vergelijking", selected_house.name, placed_house.name)
         
             if selected_house != placed_house:
-                # onder
-                if placed_house.bottom_left[1] <= selected_house.bottom_left[1] and (selected_house.top_left[0] <= placed_house.bottom_left[0] <= selected_house.top_right[0] or selected_house.top_left[0] <= placed_house.bottom_right[0] <= selected_house.top_right[0]):
-                    distance = selected_house.bottom_left[1] - placed_house.top_left[1]
-                    print("onder")
-                # boven
-                if placed_house.bottom_right[1] >=  selected_house.top_right[1] and (selected_house.bottom_left[0] <= placed_house.bottom_right[0] <= selected_house.top_left[0] or selected_house.bottom_left[0] <= placed_house.bottom_left[0] <= selected_house.top_left[0]):
-                    distance = placed_house.bottom_right[1]-selected_house.top_right[1]
-                    print("boven")
-                #links
-                if placed_house.bottom_right[0] <= selected_house.bottom_right[0] and (selected_house.bottom_left[1] <= placed_house.bottom_right[1] <= selected_house.top_left[1] or selected_house.bottom_left[1] <= placed_house.top_right[1] <= selected_house.top_left[1]):
-                    distance = selected_house.bottom_left[0]-placed_house.bottom_right[0]
-                    print("links")
-                #rechts
-                if placed_house.bottom_right[0] >= selected_house.bottom_left[0] and (selected_house.bottom_left[1] <= placed_house.bottom_right[1] <= selected_house.top_left[1] or selected_house.bottom_left[1] <= placed_house.top_right[1] <= selected_house.top_left[1]):
-                    distance = placed_house.bottom_right[0] - selected_house.bottom_left[0]
-                    print("rechts")
-                # linksboven 
-                if selected_house.top_left[0] > placed_house.bottom_right[0] and selected_house.top_left[1] < placed_house.bottom_right[1]:
-                    distance = math.sqrt((selected_house.top_left[0]-placed_house.bottom_right[0])**(2))+((placed_house.bottom_right[1]-selected_house.top_left[1])**(2))
-                    print("linksboven")
-                # rechtsboven
-                if selected_house.top_right[0] < placed_house.bottom_left[0] and selected_house.top_right[1] < placed_house.bottom_left[1]:
-                    distance = math.sqrt((placed_house.bottom_left[0]-selected_house.top_right[0])**(2))+((placed_house.bottom_left[1]-placed_house.top_right[1])**(2))
-                    print("rechtsboven")
-                # rechtsonder
-                if selected_house.bottom_right[0] < placed_house.top_left[0] and selected_house.bottom_right[1] > placed_house.top_left[1]:
-                    distance = math.sqrt((placed_house.top_left[0]-selected_house.top_right[0])**(2))+((selected_house.bottom_right[1]-selected_house.top_left[1])**(2))
-                    print("rechtsonder")
-                # linksonder
-                if selected_house.bottom_left[0] > placed_house.top_right[0] and selected_house.bottom_left[1] > placed_house.top_right[1]:
-                    distance = math.sqrt((selected_house.bottom_left[0]-placed_house.top_right[0])**(2))+((selected_house.bottom_left[1]-placed_house.top_right[1])**(2))
-                    print("linksonder")
-                print(distance)
+                
+                # links op de x-as
+                if placed_house.bottom_right[0] <= selected_house.top_left[0]: 
+                    # linksboven
+                    if placed_house.bottom_right[1] >= selected_house.top_left[1]:
+                        delta_x_sq = (place_house.bottom_right[0]-selected_house.bottom_left[0])**(2)
+                        delta_y_sq = (placed_house.bottom_right[1]-selected_house.top_left[1])**(2)
+                        distidance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # links onder
+                    elif placed_house.top_right[1] <= selected_house.bottom_left[1]:
+                        delta_x_sq = (place_house.bottom_right[0]-selected_house.bottom_left[0])**(2)
+                        delta_y_sq = (selected_house.bottom_left[1] - placed_house.top_right[1])**(2)
+                        distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # linksmidden
+                    else:
+                        distance = selected_house.bottom_left[0] - placed_house.bottom_right[0]
+                        
+
+                # rechts op de x-as
+                elif placed_house.bottom_left[0] >= selected_house.top_right[0]:
+                    # rechtsboven
+                    if placed_house.bottom_left[1] >= selected_house.top_right[1]:
+                        delta_x_sq = (placed_house.bottom_left[0]-selected_house.top_right[0])**(2)
+                        delta_y_sq = (placed_house.bottom_left[1]-selected_house.top_right[1])**(2)
+                        distance = math.sqrt(delta_x_sq + delta_y_sq)
+
+                    # rechtsonder
+                    elif placed_house.top_left[1] <= selected_house.bottom_right[1]:
+                        delta_x_sq = (placed_house.top_left[0]-selected_house.bottom_right[0])**(2)
+                        delta_y_sq = (selected_house.bottom_right[1]-placed_house.top_left[1])**(2)
+                        distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # rechtsmidden
+                    else:
+                        distance = placed_house.top_left[0] - selected_house.top_right[0]
+                        
+                # BOVEN OF ONDER
+                else:
+                    # boven
+                    if placed_house.bottom_left[1] >= selected_house.top_left[1]:
+                        distance = placed_house.bottom_left[1] - selected_house.top_left[1]
+                    # onder
+                    else:
+                        distance = selected_house.bottom_left[1] - placed_house.top_left[1]
+
                 selected_house.compared_space(placed_house, distance)
 
-                # COORDINATEN WONINGEN NIET BUITEN DE KAART
-                # EXTRA CONTROLE TOEVOEGEN
-
+                
 
 
 if __name__ == "__main__":

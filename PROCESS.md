@@ -96,3 +96,15 @@ Begonnen met het verdiepen in matplotlib om data te kunnen visualiseren, functie
 
 Donderdag 9 januari
 Begonnen met het schrijven voor het algoritme voor de kortste afstand. Daarnaast hebben we uitgezocht hoe wij onze oplossing kunnen visualiseren en hoe de beste oplossing vervolgens naar een apart file geschreven kan worden.
+
+Vrijdag 10 januari
+Bugs gefixed in het huidige programma, basis visualisatie gemaakt zonder koppeling naar ons algoritme
+
+Maandag 13 januari
+Huidige random is nog niet af, gebrainstormt over hoe we de random beter kunnen maken voor betere oplossingen
+
+dinsdag 14 januari
+-water object
+-if statement
+-visualisatie
+- kaarten toevoegen

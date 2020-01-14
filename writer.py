@@ -66,3 +66,51 @@ def write_progress(number_of_houses, solution, total_value_map):
 def delete_previous_solution():
     pass
 
+
+
+              # onder
+                if placed_house.bottom_left[1] <= selected_house.bottom_left[1] and (selected_house.top_left[0] <= placed_house.bottom_left[0] <= selected_house.top_right[0] or selected_house.top_left[0] <= placed_house.bottom_right[0] <= selected_house.top_right[0]):
+
+                    distance = selected_house.bottom_left[1] - placed_house.top_left[1]
+                # boven
+                elif placed_house.bottom_right[1] >=  selected_house.top_right[1] and (selected_house.bottom_left[0] <= placed_house.bottom_right[0] <= selected_house.bottom_right[0] or selected_house.bottom_left[0] <= placed_house.bottom_left[0] <= selected_house.bottom_right[0]):
+
+                    distance = placed_house.bottom_right[1]-selected_house.top_right[1]
+                #links
+                elif placed_house.bottom_right[0] <= selected_house.bottom_left[0] and (selected_house.bottom_left[1] <= placed_house.bottom_right[1] <= selected_house.top_left[1] or selected_house.bottom_left[1] <= placed_house.top_right[1] <= selected_house.top_left[1]):
+                    distance = selected_house.bottom_left[0]-placed_house.bottom_right[0]
+                #rechts
+                elif placed_house.bottom_right[0] >= selected_house.bottom_left[0] and (selected_house.bottom_left[1] <= placed_house.bottom_right[1] <= selected_house.top_left[1] or selected_house.bottom_left[1] <= placed_house.top_right[1] <= selected_house.top_left[1]):
+                    distance = placed_house.bottom_right[0] - selected_house.bottom_left[0]
+                # linksboven 
+                elif selected_house.top_left[0] > placed_house.bottom_right[0] and selected_house.top_left[1] < placed_house.bottom_right[1]:
+                    delta_x_sq = (selected_house.top_left[0]-placed_house.bottom_right[0])**(2)
+                    delta_y_sq = (placed_house.bottom_right[1]-selected_house.top_left[1])**(2)
+                    distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # distance = math.sqrt(((selected_house.top_left[0]-placed_house.bottom_right[0])**(2))+((placed_house.bottom_right[1]-selected_house.top_left[1])**(2)))
+                # rechtsboven
+                elif selected_house.top_right[0] < placed_house.bottom_left[0] and selected_house.top_right[1] < placed_house.bottom_left[1]:
+                    delta_x_sq = (placed_house.bottom_left[0]-selected_house.top_right[0])**(2)
+                    delta_y_sq = (placed_house.bottom_left[1]-placed_house.top_right[1])**(2)
+                    distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # distance = math.sqrt((placed_house.bottom_left[0]-selected_house.top_right[0])**(2))+((placed_house.bottom_left[1]-placed_house.top_right[1])**(2))
+                # rechtsonder
+                elif selected_house.bottom_right[0] < placed_house.top_left[0] and selected_house.bottom_right[1] > placed_house.top_left[1]:
+                    delta_x_sq = (placed_house.top_left[0]-selected_house.top_right[0])**(2)
+                    delta_y_sq = (selected_house.bottom_right[1]-selected_house.top_left[1])**(2)
+                    distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # distance = math.sqrt((placed_house.top_left[0]-selected_house.top_right[0])**(2))+((selected_house.bottom_right[1]-selected_house.top_left[1])**(2))
+                # linksonder
+                elif selected_house.bottom_left[0] > placed_house.top_right[0] and selected_house.bottom_left[1] > placed_house.top_right[1]:
+                    delta_x_sq = (selected_house.bottom_left[0]-placed_house.top_right[0])**(2)
+                    delta_y_sq = (selected_house.bottom_left[1]-placed_house.top_right[1])**(2)
+                    distance = math.sqrt(delta_x_sq + delta_y_sq)
+                    # distance = math.sqrt(((selected_house.bottom_left[0]-placed_house.top_right[0]**(2))+((selected_house.bottom_left[1]-placed_house.top_right[1])**(2))))
+
+                else:
+                    distance = 0
+                    print("9")
+                    print(selected_house, placed_house)
+                selected_house.compared_space(placed_house, distance)
+                # EXTRA CONTROLE TOEVOEGEN
+                pass

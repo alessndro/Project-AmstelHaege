@@ -15,6 +15,8 @@ class House:
         self.total_value = None
         self.extra_space = 0
         self.neighbours ={}
+        self.added_value = None
+        self.total_price = None
 
     def location(self, bottom_left):
         self.bottom_left = bottom_left
@@ -47,12 +49,12 @@ class House:
         return self.added_value
 
     def __str__(self):
-        return (self.name, self.size, self.placed, self.total_price)
+        return f"{self.name}, {self.size}, {self.placed} {self.bottom_left}"
 
 
 class Water:
-    def __init__(self, size, top_right, top_left, bottom_right, bottom_left):
-        self.size = size
+    def __init__(self, map, top_right, top_left, bottom_right, bottom_left):
+        self.map = map
         self.top_left = top_left
         self.top_right = top_right
         self.bottom_left = bottom_left
