@@ -26,17 +26,20 @@ class House:
     
     def compared_space(self, neighbour, distance):
         '''Berekend de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op'''
-        self.neighbours[neighbour] = distance
+        self.neighbours[neighbour.name] = distance
 
     def extra_meters(self):
         shortest_distance = 241 #maximale afstand totale kaart
         object_shortest_distance = None
+
+
         for tuples in self.neighbours.items():
             if tuples[1] < shortest_distance:
                 shortest_distance = tuples[1]
                 object_shortest_distance = tuples[0]
+                #print(shortest_distance)
 
-        self.extra_space = shortest_distance - obligated_space
+        self.extra_space = shortest_distance - self.obligated_space
         
     
     def totalprice(self):
@@ -59,3 +62,6 @@ class Water:
         self.top_right = top_right
         self.bottom_left = bottom_left
         self.bottom_right = bottom_right
+
+    def __str__(self):
+        return f"{self.map, self.bottom_right}"
