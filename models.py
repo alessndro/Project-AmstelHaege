@@ -1,3 +1,5 @@
+import math
+
 class House:
     def __init__(self, name, size, start_value, obligated_space, rate, length, width):
         self.name = name
@@ -14,9 +16,10 @@ class House:
         self.top_left = None
         self.total_value = None
         self.extra_space = 0
-        self.neighbours ={}
+        self.neighbours = {}
         self.added_value = None
         self.total_price = None
+        self.shortest_distance = None
 
     def location(self, bottom_left):
         self.bottom_left = bottom_left
@@ -32,12 +35,12 @@ class House:
         shortest_distance = 241 #maximale afstand totale kaart
         object_shortest_distance = None
 
-
         for tuples in self.neighbours.items():
             if tuples[1] < shortest_distance:
                 shortest_distance = tuples[1]
                 object_shortest_distance = tuples[0]
-                #print(shortest_distance)
+        
+        shortest_distance = math.floor(shortest_distance)
 
         self.extra_space = shortest_distance - self.obligated_space
         
