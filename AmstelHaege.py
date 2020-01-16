@@ -1,9 +1,8 @@
 from models import House, Water
 from random import seed
 from random import random
-from visualisation import visualisation
-from pilot2 import read_progress_run
-from writer import write_progress, write_progress_run, delete_progress
+from visualisation import visualisation, visualisation_plot
+from writer import write_progress, write_progress_run
 import _random
 import math
 import csv
@@ -47,8 +46,7 @@ def main():
         count += 1
     
     visualisation(all_houses=all_houses, waters=waters)
-    read_progress_run()
-    delete_progress()
+    visualisation_plot()
     print("HOOGSTE ", total_value_map)
 
 def random_algoritme(number_of_houses, map_number):

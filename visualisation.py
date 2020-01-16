@@ -1,4 +1,6 @@
 from matplotlib import pyplot as plt 
+from writer import read_progress_run, delete_progress_run
+
 
 def visualisation(all_houses, waters):
 
@@ -22,3 +24,17 @@ def visualisation(all_houses, waters):
                 rectangle = plt.Rectangle(house.bottom_left, 12, 10, fc='red',ec="green", linewidth=6)       
             plt.gca().add_patch(rectangle)
     plt.show()
+
+
+def visualisation_plot():
+
+    x, y = read_progress_run()
+
+    plt.plot(x, y, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
+    plt.xlabel('Count', fontsize=11)
+    plt.ylabel('Total value', fontsize=11)
+    plt.grid(True)
+    plt.show()
+
+    delete_progress_run()

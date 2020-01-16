@@ -57,8 +57,33 @@ def write_progress(number_of_houses, solution, map_number, total_value_map):
 
         writer.writerow([number_of_houses, map_number, solution, total_value_map])
 
+##############################################################################################
+# VOOR ELKE RUN 
+##############################################################################################
+
+def write_progress_run(number_of_houses, map_number, solution, total_value_map):
     
-def delete_progress():
+    with open('progress_run.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+
+        writer.writerow([number_of_houses, map_number, solution, total_value_map])
+
+def read_progress_run():
+    
+    x = []
+    y = []
+
+    with open('progress_run.csv', 'r') as file:
+        reader = csv.reader(file)
+
+        for line in reader:
+            x.append(line[2]) 
+            y.append(line[3])
+
+    return x, y
+
+    
+def delete_progress_run():
     lines = []
     with open('progress_run.csv', 'r') as file:
         reader = csv.reader(file)
@@ -72,13 +97,6 @@ def delete_progress():
 
         writer.writerows(lines)
             
-
-def write_progress_run(number_of_houses, map_number, solution, total_value_map):
-    
-    with open('progress_run.csv', 'a', newline='') as file:
-        writer = csv.writer(file)
-
-        writer.writerow([number_of_houses, map_number, solution, total_value_map])
 
     
 
