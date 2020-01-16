@@ -35,36 +35,52 @@ def write_solution_down(total_value_map, all_houses, number_of_houses, all_water
         write.writerow(["Total value solution = ", total_value_map])
     writer.close()
 
-def read_previous_solutions(chosen_map, number_of_houses):
+# def read_previous_solutions(chosen_map, number_of_houses):
     
-    highest_total_value_map = 0
-    solution = -1
-    with open ('progress.csv', 'r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if chosen_map == row[1] and number_of_houses == row[0]:
-                if row[3] > highest_total_value_map
-                highest_total_value_map = row[3]
-                solution = row[2]
+#     highest_total_value_map = 0
+#     solution = -1
+#     with open ('progress.csv', 'r') as file:
+#         reader = csv.reader(file)
+#         for row in reader:
+#             if chosen_map == row[1] and number_of_houses == row[0]:
+#                 if row[3] > highest_total_value_map
+#                 highest_total_value_map = row[3]
+#                 solution = row[2]
 
-    reader.close()
-    return highest_total_value_map, solution
+#     reader.close()
+#     return highest_total_value_map, solution
 
-def write_progress(number_of_houses, solution, total_value_map):
+def write_progress(number_of_houses, solution, map_number, total_value_map):
 
-    with open('progress.csv', 'w', newline='') as file:
+    with open('progress.csv', 'a', newline='') as file:
         writer = csv.writer(file)
 
-        if number_of_houses == 20:
-            write.writerow([number_of_houses, chosen_map, solution, total_value_map])
-        if number_of_houses == 40:
+        writer.writerow([number_of_houses, map_number, solution, total_value_map])
 
-        if number_of_houses == 60:
-    writer.close()
+    
+def delete_progress():
+    lines = []
+    with open('progress_run.csv', 'r') as file:
+        reader = csv.reader(file)
 
+        for row in reader:
+            pass
+            
+    with open('progress_run.csv', 'w') as file:
 
-def delete_previous_solution():
-    pass
+        writer = csv.writer(file)
+
+        writer.writerows(lines)
+            
+
+def write_progress_run(number_of_houses, map_number, solution, total_value_map):
+    
+    with open('progress_run.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+
+        writer.writerow([number_of_houses, map_number, solution, total_value_map])
+
+    
 
 
 

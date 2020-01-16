@@ -1,10 +1,14 @@
 from models import House, Water
 from random import seed
 from random import random
-from pilot import visualisation
+from visualisation import visualisation
+from pilot2 import read_progress_run
+from writer import write_progress, write_progress_run, delete_progress
 import _random
 import math
 import csv
+import copy
+
 
 # Import the necessary packages and modules for matplotlib
 import matplotlib.pyplot as plt
@@ -19,8 +23,6 @@ MAXIMUM_WIDTH = 160
 WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
-    
-    
     # ask user for number of houses to be placed
     while True:
         number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
@@ -29,6 +31,27 @@ def main():
         
         if (number_of_houses == 20 or number_of_houses == 40 or number_of_houses == 60) and (map_number > 0 and map_number <= 3):
             break
+
+    all_houses_dic = {}
+    total_value_map = 0
+    waters = []
+    count = 0
+    for i in range(10):
+        print(count)
+        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
+        write_progress(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
+        write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
+        if total_value > total_value_map:
+            total_value_map = total_value
+            all_houses_dic = copy.deepcopy(all_houses)
+        count += 1
+    
+    visualisation(all_houses=all_houses, waters=waters)
+    read_progress_run()
+    delete_progress()
+    print("HOOGSTE ", total_value_map)
+
+def random_algoritme(number_of_houses, map_number):
 
     # determine division houses
     number_small, number_medium, number_large = ratio_houses(number_of_houses)
@@ -54,25 +77,6 @@ def main():
 
     for house in all_houses["small"]:
         algoritme(house, all_houses, waters)
-        
-    startvalues = 0
-    for item in all_houses.values():
-        for house in item:
-            startvalues += house.start_value
-    print("startvalues", startvalues)
-
-    total_value_map = 0
-    for item in all_houses.values():
-        for house in item:
-            house.extra_meters()
-            total_value_map += house.totalprice()
-
-    visualisation(all_houses=all_houses, waters=waters)
-    print("Waarde zonder alle dict")
-    print(total_value_map)
-
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-
 
     for items in all_houses.values():
         for selected_house in items:
@@ -84,9 +88,7 @@ def main():
             house.extra_meters()
             total_value_map += house.totalprice()
 
-    visualisation(all_houses=all_houses, waters=waters)
-
-    print(total_value_map)
+    return all_houses, total_value_map, waters
 
 def total_distance(selected_house, all_houses):
     '''Bewaard de tot nu toe onbekende distance tot alle huizen'''
@@ -118,7 +120,8 @@ def algoritme(house, all_houses, waters):
             house.placed = True
             break
     
-def algoritme2()
+def algoritme2():
+    pass
 
 
 def place_house(selected_house, all_houses, waters):
@@ -260,3 +263,5 @@ def create_water_object(map_number):
          
 if __name__ == "__main__":
     main()
+
+
