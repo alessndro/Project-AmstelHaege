@@ -29,7 +29,7 @@ class House:
     
     def compared_space(self, neighbour, distance):
         '''Berekend de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op'''
-        self.neighbours[neighbour.name] = distance
+        self.neighbours[neighbour.name] = math.floor(distance)
 
     def extra_meters(self):
         shortest_distance = 241 #maximale afstand totale kaart
@@ -40,7 +40,7 @@ class House:
                 shortest_distance = tuples[1]
                 object_shortest_distance = tuples[0]
         
-        shortest_distance = math.floor(shortest_distance)
+        self.shortest_distance = math.floor(shortest_distance)
 
         self.extra_space = shortest_distance - self.obligated_space
         

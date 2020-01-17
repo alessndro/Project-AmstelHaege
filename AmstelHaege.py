@@ -42,12 +42,47 @@ def main():
         write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
         if total_value > total_value_map:
             total_value_map = total_value
+            print(total_value)
             all_houses_dic = copy.deepcopy(all_houses)
         count += 1
+
+        for key in all_houses.values():
+            for house in key:
+                print(house.name, house.neighbours)
+                print("###########################################")
+
+        visualisation(all_houses=all_houses, waters=waters)
+
+
+    # for item in all_houses.values():
+    #     for house in item:
+    #         all_houses1, new_total=algoritme2(house=house,all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+
+    # for house in all_houses1["large"]:
+    #     print(house)
+
+    # for item in all_houses1.values():
+    #     for house in item:
+    #         all_houses2, new_total=algoritme2(house=house,all_houses=all_houses1, waters=waters, total_value_map=total_value_map)
+
+    # for item in all_houses2.values():
+    #     for house in item:
+    #         all_houses3, new_total=algoritme2(house=house,all_houses=all_houses2, waters=waters, total_value_map=total_value_map)
+
+    # for item in all_houses3.values():
+    #     for house in item:
+    #         all_houses4, new_total=algoritme2(house=house,all_houses=all_houses3, waters=waters, total_value_map=total_value_map)
     
-    visualisation(all_houses=all_houses, waters=waters)
+    # for item in all_houses4.values():
+    #     for house in item:
+    #         all_houses5, new_total=algoritme2(house=house,all_houses=all_houses4, waters=waters, total_value_map=total_value_map)
+
+    
+    
+    visualisation(all_houses=all_houses, waters=waters)            #!!!
     visualisation_plot()
     print("HOOGSTE ", total_value_map)
+    print("daarna", new_total)
 
 def random_algoritme(number_of_houses, map_number):
 
@@ -118,33 +153,80 @@ def algoritme(house, all_houses, waters):
             house.placed = True
             break
     
-def algoritme2():
-    pass
+    
+def algoritme2(house, all_houses, waters, total_value_map):
+    total_value_map_NEW = total_value_map
+
+    print(house)
+    # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
+    rangex = MAXIMUM_WIDTH - house.width
+    rangey = MAXIMUM_HEIGHT - house.length
+    # iterate over all cordinates
+    for x in range(rangex):
+        for y in range(rangey):
+
+            tempx = house.bottom_left[0]
+            tempy = house.bottom_left[1]
+            # save cordinates house.bottom_left
+            bottom_left = (x,y)
+            # change cordinates of bl to new location
+            house.location(bottom_left)
+            # if you can place house on new location
+
+            if place_house(house, all_houses, waters) == True:
+                # bereken nieuw waarde map, waarin huis is verplaatst
+                total_value_map_temp = 0
+                for item in all_houses.values():
+                    for house in item:
+                        house.extra_meters()
+                        total_value_map_temp += house.totalprice()
+
+                # als waarde met nieuwe locatie hoger is, verander deze
+                if total_value_map_NEW < total_value_map_temp:
+                    total_value_map_NEW = total_value_map_temp
+                    
+                # als waarde niet hoger is verander naar oude locatie
+                else:
+                    bottom_left = (tempx,tempy)
+                    house.location(bottom_left)
+            else:
+                bottom_left = (tempx,tempy)
+                house.location(bottom_left)
+            
+    return all_houses, total_value_map_NEW
+    
+def algoritme3():
+    ps
 
 
 def place_house(selected_house, all_houses, waters):
-    '''Bepaald of een huis op de gekozen locatie geplaatst kan worden '''
+    '''Bepaald of een huis op de gekozen locate geplaatst kan worden '''
 
     for water in waters:
-        if water.bottom_left[0] < selected_house.bottom_left[0] < water.bottom_right[0] and water.bottom_left[1] < selected_house.bottom_left[1] < water.top_left[1]:   
-            return False
-        
-        if water.bottom_left[0] < selected_house.bottom_right[0] < water.bottom_right[0] and water.bottom_left[1] < selected_house.bottom_right[1] < water.top_left[1]:   
+        distance = distance_berekening(selected_house, water)
+        if distance <= 0:
             return False
 
-        if water.bottom_left[0] < selected_house.top_left[0] < water.bottom_right[0] and water.bottom_left[1] < selected_house.top_left[1] < water.top_left[1]:   
+        if water.bottom_left[0] <= selected_house.bottom_left[0] <= water.bottom_right[0] and water.bottom_left[1] <= selected_house.bottom_left[1] <= water.top_left[1]:   
+            return False
+        if water.bottom_left[0] <= selected_house.bottom_right[0] <= water.bottom_right[0] and water.bottom_right[1] <= selected_house.bottom_right[1] <= water.top_right[1]:   
+            return False
+        if water.bottom_left[0] <= selected_house.top_left[0] <= water.bottom_right[0] and water.bottom_left[1] <= selected_house.top_left[1] <= water.top_left[1]:   
+            return False
+        if water.bottom_left[0] <= selected_house.top_right[0] <= water.bottom_right[0] and water.bottom_right[1] <= selected_house.top_right[1] <= water.top_right[1]:   
             return False
 
-        if water.bottom_left[0] < selected_house.top_right[0] < water.bottom_right[0] and water.bottom_left[1] < selected_house.top_right[1] < water.top_left[1]:   
-            return False
+    
 
     for key in all_houses.values():
         for placed_house in key:
             if (placed_house.placed == True) and (selected_house != placed_house):
                 distance = distance_berekening(selected_house, placed_house)
-                if distance < placed_house.obligated_space or distance < selected_house.obligated_space:
+                # HIER DE = NOG WEGHALEN LATER
+                if distance <= placed_house.obligated_space or distance <= selected_house.obligated_space:
                     return False
                 selected_house.compared_space(placed_house, distance)
+                placed_house.compared_space(selected_house, distance)
     return True
 
 
