@@ -94,6 +94,7 @@ def main():
         all_houses_new, total_value = greedy_algoritme(house, all_houses, waters)
     
 
+
     ##################################################################################
     # loops for testing the different algoritms
     #################################################################################
@@ -165,15 +166,6 @@ def random_algoritme(number_of_houses, map_number):
             total_value_map += house.totalprice()
 
     return all_houses, total_value_map, waters
-
-def total_distance(selected_house, all_houses):
-    '''Bewaard de tot nu toe onbekende distance tot alle huizen'''
-    for items in all_houses.values():
-        for neighbour in items:
-            if selected_house != neighbour:
-                if selected_house.neighbours.keys() != neighbour.name:
-                    distance = distance_berekening(selected_house, neighbour)
-                    selected_house.compared_space(neighbour, distance)
 
 def algoritme(house, all_houses, waters):
     '''Places all houses at random locations '''
@@ -299,6 +291,7 @@ def algoritme3(house, all_houses, waters, total_value_map):
                             houses.totalprice()
 
     return all_houses, total_value_map_NEW
+
 
 def algoritme4(house, all_houses, waters, total_value_map):
     total_value_map_NEW = total_value_map
@@ -450,6 +443,7 @@ def greedy_algoritme(house, all_houses, waters):
     return all_houses, total_value_map_NEW
     
 
+
 def place_house(selected_house, all_houses, waters):
     '''Bepaald of een huis op de gekozen locate geplaatst kan worden '''
 
@@ -479,6 +473,7 @@ def place_house(selected_house, all_houses, waters):
                 selected_house.compared_space(placed_house, distance)
                 placed_house.compared_space(selected_house, distance)
     return True
+
 
 def distance_berekening(selected_house, placed_house):
 
@@ -527,6 +522,7 @@ def distance_berekening(selected_house, placed_house):
 
     return distance
 
+
 def randomizer():
     ''' Generates a random x and y value'''
     # Daniel wil seed later gebruiken, zorgt voor zelfde uitkomst okal random
@@ -542,10 +538,32 @@ def ratio_houses(number_of_houses):
     large = int(RATIO_LARGE * number_of_houses)
     
     return (small, medium, large)
-        name = "L" + str(count)
-        large = House(name=name, size=house_sort, start_value=610000, obligated_space=6, rate=0.06, length=10, width=12)
-        list_of_objects.append(large)
-        count += 1
+
+def create_house_object(house_size, house_sort):
+    '''Creates all the objects for a particular house and returns a list'''
+    list_of_objects = []
+
+    if house_sort == "small":
+        count = 0
+        for i in range(house_size):
+            name = "S" + str(count)
+            small = House(name=name, size=house_sort, start_value=285000, obligated_space=2, rate=0.03, length=8, width=8)
+            list_of_objects.append(small)
+            count += 1
+    if house_sort == "medium":
+        count = 0
+        for i in range(house_size):
+            name = "M" + str(count)
+            medium = House(name=name, size=house_sort, start_value=399000, obligated_space=3, rate=0.04, length=7, width=11)
+            list_of_objects.append(medium)
+            count += 1
+    if house_sort == "large":
+        count = 0
+        for i in range(house_size):
+            name = "L" + str(count)
+            large = House(name=name, size=house_sort, start_value=610000, obligated_space=6, rate=0.06, length=10, width=12)
+            list_of_objects.append(large)
+            count += 1
     return list_of_objects
 
 def create_water_object(map_number):
@@ -567,6 +585,8 @@ def create_water_object(map_number):
         waters.append(water0)
 
     return waters
-         
+    
 if __name__ == "__main__":
     main()
+
+
