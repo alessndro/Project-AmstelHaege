@@ -94,7 +94,6 @@ def main():
         all_houses_new, total_value = greedy_algoritme(house, all_houses, waters)
     
 
-
     ##################################################################################
     # loops for testing the different algoritms
     #################################################################################
@@ -175,7 +174,6 @@ def total_distance(selected_house, all_houses):
                 if selected_house.neighbours.keys() != neighbour.name:
                     distance = distance_berekening(selected_house, neighbour)
                     selected_house.compared_space(neighbour, distance)
-
 
 def algoritme(house, all_houses, waters):
     '''Places all houses at random locations '''
@@ -301,7 +299,6 @@ def algoritme3(house, all_houses, waters, total_value_map):
                             houses.totalprice()
 
     return all_houses, total_value_map_NEW
-
 
 def algoritme4(house, all_houses, waters, total_value_map):
     total_value_map_NEW = total_value_map
@@ -453,7 +450,6 @@ def greedy_algoritme(house, all_houses, waters):
     return all_houses, total_value_map_NEW
     
 
-
 def place_house(selected_house, all_houses, waters):
     '''Bepaald of een huis op de gekozen locate geplaatst kan worden '''
 
@@ -483,7 +479,6 @@ def place_house(selected_house, all_houses, waters):
                 selected_house.compared_space(placed_house, distance)
                 placed_house.compared_space(selected_house, distance)
     return True
-
 
 def distance_berekening(selected_house, placed_house):
 
@@ -532,7 +527,6 @@ def distance_berekening(selected_house, placed_house):
 
     return distance
 
-
 def randomizer():
     ''' Generates a random x and y value'''
     # Daniel wil seed later gebruiken, zorgt voor zelfde uitkomst okal random
@@ -548,21 +542,10 @@ def ratio_houses(number_of_houses):
     large = int(RATIO_LARGE * number_of_houses)
     
     return (small, medium, large)
-            count += 1
-    if house_sort == "medium":
-        count = 0
-        for i in range(house_size):
-            name = "M" + str(count)
-            medium = House(name=name, size=house_sort, start_value=399000, obligated_space=3, rate=0.04, length=7, width=11)
-            list_of_objects.append(medium)
-            count += 1
-    if house_sort == "large":
-        count = 0
-        for i in range(house_size):
-            name = "L" + str(count)
-            large = House(name=name, size=house_sort, start_value=610000, obligated_space=6, rate=0.06, length=10, width=12)
-            list_of_objects.append(large)
-            count += 1
+        name = "L" + str(count)
+        large = House(name=name, size=house_sort, start_value=610000, obligated_space=6, rate=0.06, length=10, width=12)
+        list_of_objects.append(large)
+        count += 1
     return list_of_objects
 
 def create_water_object(map_number):
@@ -587,5 +570,3 @@ def create_water_object(map_number):
          
 if __name__ == "__main__":
     main()
-
-
