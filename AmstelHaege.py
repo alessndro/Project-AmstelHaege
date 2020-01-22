@@ -7,7 +7,7 @@ import _random
 import math
 import csv
 import copy
-
+import time
 
 # Import the necessary packages and modules for matplotlib
 import matplotlib.pyplot as plt
@@ -22,6 +22,11 @@ MAXIMUM_WIDTH = 160
 WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
+
+    t = time.time()
+    #script zonder plot
+    elap = time.time() - t
+
     # ask user for number of houses to be placed
     while True:
         number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
@@ -35,34 +40,74 @@ def main():
     total_value_map = 0
     waters = []
     count = 0
-    for i in range(1):
-        print(count)
-        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
-        write_progress(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
-        write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
-        if total_value > total_value_map:
-            total_value_map = total_value
-            print(total_value)
-            all_houses_dic = copy.deepcopy(all_houses)
-        count += 1
+    #############################################################################
+    # RANDOM 
+    #############################################################################
+    # for i in range(1):
+    #     print(count)
+    #     all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
+    #     write_progress(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
+    #     write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
+    #     if total_value > total_value_map:
+    #         total_value_map = total_value
+    #         print(total_value)
+    #         all_houses_dic = copy.deepcopy(all_houses)
+    #     count += 1
 
-        for key in all_houses.values():
-            for house in key:
-                print(house.name, house.neighbours)
-                print("###########################################")
+    # visualisation(all_houses=all_houses, waters=waters)
+    
+    ##############################################################################
+    # VOOR GREEDY
+    ##############################################################################
+    
+    # determine division houses
+    number_small, number_medium, number_large = ratio_houses(number_of_houses)
 
-        visualisation(all_houses=all_houses, waters=waters)
+    # create list of objects
+    small_houses = create_house_object(number_small, "small")
+    medium_houses = create_house_object(number_medium, "medium")
+    large_houses = create_house_object(number_large, "large")
+    waters = create_water_object(map_number)
+    
+    # save lists in dictionary
+    all_houses = {}
+    all_houses["small"] = small_houses
+    all_houses["medium"] = medium_houses
+    all_houses["large"] = large_houses
 
-    # for item in all_houses.values():
-    #     for house in item:
-    #         all_houses1, new_total=algoritme2(house=house,all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+    for house in all_houses["large"]:
+        all_houses_new, total_value = greedy_algoritme(house, all_houses, waters)
 
-    # for house in all_houses1["large"]:
-    #     print(house)
+        
+    visualisation(all_houses=all_houses_new, waters=waters)            #!!!
+    visualisation_plot()
+    
 
-    # for item in all_houses1.values():
-    #     for house in item:
-    #         all_houses2, new_total=algoritme2(house=house,all_houses=all_houses1, waters=waters, total_value_map=total_value_map)
+    for house in all_houses["medium"]:
+        all_houses_new, total_value = greedy_algoritme(house, all_houses, waters)
+
+        
+    visualisation(all_houses=all_houses_new, waters=waters)            #!!!
+    visualisation_plot()
+
+    for house in all_houses_new["small"]:
+        all_houses_new, total_value = greedy_algoritme(house, all_houses, waters)
+    
+
+
+    ##################################################################################
+    # loops for testing the different algoritms
+    #################################################################################
+
+    #for item in all_houses.values():
+    #   for house in item:
+    #          all_houses1, new_total=algoritme2(house=house,all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+    
+    # print("tussendoor", new_total)
+
+    #for item in all_houses1.values():
+        #for house in item:
+            #all_houses2, new_total=algoritme5(house=house,all_houses=all_houses1, waters=waters, total_value_map=total_value_map)
 
     # for item in all_houses2.values():
     #     for house in item:
@@ -78,10 +123,10 @@ def main():
 
     
     
-    # visualisation(all_houses=all_houses, waters=waters)            #!!!
-    # visualisation_plot()
-    # print("HOOGSTE ", total_value_map)
-    # print("daarna", new_total)
+    visualisation(all_houses=all_houses_new, waters=waters) 
+    elap = time.time() - t
+    visualisation_plot()
+    print("HOOGSTE ", total_value)
 
 def random_algoritme(number_of_houses, map_number):
 
@@ -133,6 +178,7 @@ def total_distance(selected_house, all_houses):
 
 
 def algoritme(house, all_houses, waters):
+    '''Places all houses at random locations '''
 
     while True:
 
@@ -154,6 +200,7 @@ def algoritme(house, all_houses, waters):
     
     
 def algoritme2(house, all_houses, waters, total_value_map):
+    ''' Ascending hillclimber plaatst huizen op een nieuwe locatie afhankelijk van totale waarde kaart '''
     total_value_map_NEW = total_value_map
 
     # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
@@ -162,39 +209,50 @@ def algoritme2(house, all_houses, waters, total_value_map):
     # iterate over all cordinates
     for x in range(rangex):
         for y in range(rangey):
+            if house.placed == True:
+                tempx = house.bottom_left[0]
+                tempy = house.bottom_left[1]
+                # save cordinates house.bottom_left
+                bottom_left = (x,y)
+                # change cordinates of bl to new location
+                house.location(bottom_left)
+                # if you can place house on new location
 
-            tempx = house.bottom_left[0]
-            tempy = house.bottom_left[1]
-            # save cordinates house.bottom_left
-            bottom_left = (x,y)
-            # change cordinates of bl to new location
-            house.location(bottom_left)
-            # if you can place house on new location
+                if place_house(house, all_houses, waters) == True:
+                    # bereken nieuw waarde map, waarin huis is verplaatst
+                    total_value_map_temp = 0
+                    for item in all_houses.values():
+                        for house in item:
+                            house.extra_meters()
+                            total_value_map_temp += house.totalprice()
 
-            if place_house(house, all_houses, waters) == True:
-                # bereken nieuw waarde map, waarin huis is verplaatst
-                total_value_map_temp = 0
-                for item in all_houses.values():
-                    for house in item:
-                        house.extra_meters()
-                        total_value_map_temp += house.totalprice()
-
-                # als waarde met nieuwe locatie hoger is, verander deze
-                if total_value_map_NEW < total_value_map_temp:
-                    total_value_map_NEW = total_value_map_temp
-                    
-                # als waarde niet hoger is verander naar oude locatie
+                    # als waarde met nieuwe locatie hoger is, verander deze
+                    if total_value_map_NEW < total_value_map_temp:
+                        total_value_map_NEW = total_value_map_temp
+                        
+                    # als waarde niet hoger is verander naar oude locatie
+                    else:
+                        bottom_left = (tempx,tempy)
+                        house.location(bottom_left)
+                        if place_house(house, all_houses, waters) == True:
+                            for item in all_houses.values():
+                                for houses in item:
+                                    houses.extra_meters()
+                                    houses.totalprice()
                 else:
                     bottom_left = (tempx,tempy)
                     house.location(bottom_left)
-            else:
-                bottom_left = (tempx,tempy)
-                house.location(bottom_left)
+                    if place_house(house, all_houses, waters) == True:
+                        for item in all_houses.values():
+                            for houses in item:
+                                houses.extra_meters()
+                                houses.totalprice()
             
     return all_houses, total_value_map_NEW
     
     
 def algoritme3(house, all_houses, waters, total_value_map):
+    """pakt random 100 punten en kijkt of de totale waarde hoger wordt"""
     total_value_map_NEW = total_value_map
 
     # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
@@ -213,7 +271,6 @@ def algoritme3(house, all_houses, waters, total_value_map):
         # change cordinates of bl to new location
         house.location(bottom_left)
         # if you can place house on new location
-
         if place_house(house, all_houses, waters) == True:
             # bereken nieuw waarde map, waarin huis is verplaatst
             total_value_map_temp = 0
@@ -229,9 +286,19 @@ def algoritme3(house, all_houses, waters, total_value_map):
             else:
                 bottom_left = (tempx,tempy)
                 house.location(bottom_left)
+                if place_house(house, all_houses, waters) == True:
+                    for item in all_houses.values():
+                        for houses in item:
+                            houses.extra_meters()
+                            houses.totalprice()
         else:
             bottom_left = (tempx,tempy)
             house.location(bottom_left)
+            if place_house(house, all_houses, waters) == True:
+                    for item in all_houses.values():
+                        for houses in item:
+                            houses.extra_meters()
+                            houses.totalprice()
 
     return all_houses, total_value_map_NEW
 
@@ -280,6 +347,111 @@ def algoritme4(house, all_houses, waters, total_value_map):
                         house.location(bottom_left)
 
     return all_houses, total_value_map_NEW
+
+def algoritme5(house, all_houses, waters, total_value_map):
+    """swapt huizen en kijkt of de totale waarde verandert"""
+    total_value_map_NEW = total_value_map
+    selected_house = house
+
+    for item in all_houses.values():
+        for placed_house in item:
+            if placed_house != selected_house:
+                # sla de oude locaties van de huizen op
+                temp_selected_bl = selected_house.bottom_left
+                
+                temp_placed_bl = placed_house.bottom_left
+
+                placed_house.location(temp_selected_bl)
+
+                selected_house.location(temp_placed_bl)
+                
+                if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:                  
+                    # bereken nieuw waarde map, waarin huis is verplaatst
+                    total_value_map_temp = 0
+                    for item in all_houses.values():
+                        for house in item:
+                            house.extra_meters()
+                            total_value_map_temp += house.totalprice()
+
+                    # als waarde met nieuwe locatie hoger is, verander deze
+                    if total_value_map_NEW < total_value_map_temp:
+                        total_value_map_NEW = total_value_map_temp
+                    # als waarde niet hoger is verander naar oude locatie
+                    else:
+                        placed_house.location(temp_placed_bl)
+                        selected_house.location(temp_selected_bl)
+                        if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:
+                            for item in all_houses.values():
+                                for house in item:
+                                    house.extra_meters()
+                                    house.totalprice()
+                    
+                else:
+                    placed_house.location(temp_placed_bl)
+                    selected_house.location(temp_selected_bl)
+                    if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:
+                        for item in all_houses.values():
+                            for house in item:
+                                house.extra_meters()
+                                house.totalprice()
+
+    return all_houses, total_value_map_NEW
+    
+
+def greedy_algoritme(house, all_houses, waters):
+
+    algoritme(house, all_houses, waters)
+    house.extra_meters()
+    house.totalprice()
+
+    total_value_map_NEW = 0
+    # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
+    rangex = MAXIMUM_WIDTH - house.length
+    rangey = MAXIMUM_HEIGHT - house.width
+    # iterate over all cordinates
+    for x in range(rangex):
+        for y in range(rangey):
+            tempx = house.bottom_left[0]
+            tempy = house.bottom_left[1]
+            # save cordinates house.bottom_left
+            bottom_left = (x,y)
+            # change cordinates of bl to new location
+            house.location(bottom_left)
+            # if you can place house on new location
+            print(place_house(house, all_houses, waters))
+            if place_house(house, all_houses, waters) == True:
+                # bereken nieuw waarde map, waarin huis is verplaatst
+                total_value_map_temp = 0
+                for item in all_houses.values():
+                    for selected_house in item:
+                        if selected_house.placed == True:
+                            selected_house.extra_meters()
+                            total_value_map_temp += selected_house.totalprice()
+
+                # als waarde met nieuwe locatie hoger is, verander deze
+                if total_value_map_NEW < total_value_map_temp:
+                    total_value_map_NEW = total_value_map_temp
+                    
+                # als waarde niet hoger is verander naar oude locatie
+                else:
+                    bottom_left = (tempx,tempy)
+                    house.location(bottom_left)
+                    if place_house(house, all_houses, waters) == True:
+                        for item in all_houses.values():
+                            for houses in item:
+                                houses.extra_meters()
+                                houses.totalprice()
+            else:
+                bottom_left = (tempx,tempy)
+                house.location(bottom_left)
+                if place_house(house, all_houses, waters) == True:
+                        for item in all_houses.values():
+                            for houses in item:
+                                houses.extra_meters()
+                                houses.totalprice()
+            
+    return all_houses, total_value_map_NEW
+    
 
 
 def place_house(selected_house, all_houses, waters):
@@ -376,17 +548,6 @@ def ratio_houses(number_of_houses):
     large = int(RATIO_LARGE * number_of_houses)
     
     return (small, medium, large)
-
-def create_house_object(house_size, house_sort):
-    '''Creates all the objects for a particular house and returns a list'''
-    list_of_objects = []
-
-    if house_sort == "small":
-        count = 0
-        for i in range(house_size):
-            name = "S" + str(count)
-            small = House(name=name, size=house_sort, start_value=285000, obligated_space=2, rate=0.03, length=8, width=8)
-            list_of_objects.append(small)
             count += 1
     if house_sort == "medium":
         count = 0

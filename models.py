@@ -15,7 +15,7 @@ class House:
         self.top_right = None
         self.top_left = None
         self.total_value = None
-        self.extra_space = 0
+        self.extra_space = 0 
         self.neighbours = {}
         self.added_value = None
         self.total_price = None

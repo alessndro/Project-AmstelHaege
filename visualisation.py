@@ -21,29 +21,24 @@ def visualisation(all_houses, waters):
     tekst=[]
     for key in all_houses.values():
         for house in key:
-            xx.append(house.bottom_left[0])
-            yy.append(house.bottom_left[1])
-            tekst.append(str(house.name))
-            if house.size == "small":
-                rectangle = plt.Rectangle(house.bottom_left, 8, 8, fc='purple',ec="green", linewidth=2)
-            if house.size == "medium":
-                rectangle = plt.Rectangle(house.bottom_left, 11, 7, fc='yellow',ec="green", linewidth=3,)
-            if house.size == "large":
-                rectangle = plt.Rectangle(house.bottom_left, 12, 10, fc='red',ec="green", linewidth=6)       
-            plt.gca().add_patch(rectangle)
+            if house.placed == True:
+                xx.append(house.bottom_left[0])
+                yy.append(house.bottom_left[1])
+                tekst.append(str(house.name))
+                if house.size == "small":
+                    rectangle = plt.Rectangle(house.bottom_left, 8, 8, fc='purple',ec="green", linewidth=2)
+                if house.size == "medium":
+                    rectangle = plt.Rectangle(house.bottom_left, 11, 7, fc='yellow',ec="green", linewidth=3,)
+                if house.size == "large":
+                    rectangle = plt.Rectangle(house.bottom_left, 12, 10, fc='red',ec="green", linewidth=6)       
+                plt.gca().add_patch(rectangle)
 
-    
-   
-    print(xx)
-    print(yy)
-    print(tekst)
 
-    fig, ax = plt.subplots()
-    ax.scatter(xx,yy)
-
-    for i,txt in enumerate(tekst):
-        points = ax.annotate(txt, (xx[i], yy[i]))
-
+    for i,tekst in enumerate(tekst):
+        x = xx[i]
+        y = yy[i]
+        plt.scatter(x, y, marker='x', color='blue')
+        plt.text(x, y, tekst, fontsize=12)
 
     plt.show()
 
