@@ -53,35 +53,35 @@ def main():
 
         visualisation(all_houses=all_houses, waters=waters)
 
-    for item in all_houses.values():
-        for house in item:
-            all_houses1, new_total=algoritme2(house=house,all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+    # for item in all_houses.values():
+    #     for house in item:
+    #         all_houses1, new_total=algoritme2(house=house,all_houses=all_houses, waters=waters, total_value_map=total_value_map)
 
     # for house in all_houses1["large"]:
     #     print(house)
 
-    for item in all_houses1.values():
-        for house in item:
-            all_houses2, new_total=algoritme2(house=house,all_houses=all_houses1, waters=waters, total_value_map=total_value_map)
+    # for item in all_houses1.values():
+    #     for house in item:
+    #         all_houses2, new_total=algoritme2(house=house,all_houses=all_houses1, waters=waters, total_value_map=total_value_map)
 
-    for item in all_houses2.values():
-        for house in item:
-            all_houses3, new_total=algoritme2(house=house,all_houses=all_houses2, waters=waters, total_value_map=total_value_map)
+    # for item in all_houses2.values():
+    #     for house in item:
+    #         all_houses3, new_total=algoritme2(house=house,all_houses=all_houses2, waters=waters, total_value_map=total_value_map)
 
-    for item in all_houses3.values():
-        for house in item:
-            all_houses4, new_total=algoritme2(house=house,all_houses=all_houses3, waters=waters, total_value_map=total_value_map)
+    # for item in all_houses3.values():
+    #     for house in item:
+    #         all_houses4, new_total=algoritme2(house=house,all_houses=all_houses3, waters=waters, total_value_map=total_value_map)
     
-    for item in all_houses4.values():
-        for house in item:
-            all_houses5, new_total=algoritme2(house=house,all_houses=all_houses4, waters=waters, total_value_map=total_value_map)
+    # for item in all_houses4.values():
+    #     for house in item:
+    #         all_houses5, new_total=algoritme2(house=house,all_houses=all_houses4, waters=waters, total_value_map=total_value_map)
 
     
     
-    visualisation(all_houses=all_houses, waters=waters)            #!!!
-    visualisation_plot()
-    print("HOOGSTE ", total_value_map)
-    print("daarna", new_total)
+    # visualisation(all_houses=all_houses, waters=waters)            #!!!
+    # visualisation_plot()
+    # print("HOOGSTE ", total_value_map)
+    # print("daarna", new_total)
 
 def random_algoritme(number_of_houses, map_number):
 
@@ -198,8 +198,8 @@ def algoritme3(house, all_houses, waters, total_value_map):
     total_value_map_NEW = total_value_map
 
     # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
-    rangex = MAXIMUM_WIDTH - house.length
-    rangey = MAXIMUM_HEIGHT - house.width
+    rangex = MAXIMUM_WIDTH - house.width
+    rangey = MAXIMUM_HEIGHT - house.length
 
     for x in range(100):
 

@@ -16,15 +16,35 @@ def visualisation(all_houses, waters):
         water = plt.Rectangle((water.bottom_left), water.bottom_right[0] - water.bottom_left[0], water.top_right[1] - water.bottom_left[1], fc='blue') 
         plt.gca().add_patch(water) 
    
+    xx=[]
+    yy=[]
+    tekst=[]
     for key in all_houses.values():
-        for house in key: 
+        for house in key:
+            xx.append(house.bottom_left[0])
+            yy.append(house.bottom_left[1])
+            tekst.append(str(house.name))
             if house.size == "small":
                 rectangle = plt.Rectangle(house.bottom_left, 8, 8, fc='purple',ec="green", linewidth=2)
             if house.size == "medium":
-                rectangle = plt.Rectangle(house.bottom_left, 11, 7, fc='yellow',ec="green", linewidth=3)
+                rectangle = plt.Rectangle(house.bottom_left, 11, 7, fc='yellow',ec="green", linewidth=3,)
             if house.size == "large":
                 rectangle = plt.Rectangle(house.bottom_left, 12, 10, fc='red',ec="green", linewidth=6)       
             plt.gca().add_patch(rectangle)
+
+    
+   
+    print(xx)
+    print(yy)
+    print(tekst)
+
+    fig, ax = plt.subplots()
+    ax.scatter(xx,yy)
+
+    for i,txt in enumerate(tekst):
+        points = ax.annotate(txt, (xx[i], yy[i]))
+
+
     plt.show()
 
 def visualisation_plot():
