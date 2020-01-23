@@ -1,5 +1,5 @@
 import math
-
+import time
 class House:
     def __init__(self, name, size, start_value, obligated_space, rate, length, width):
         self.name = name
@@ -68,3 +68,17 @@ class Water:
 
     def __str__(self):
         return f"{self.map, self.bottom_right}"
+
+
+class Timer(object):
+    def __init__(self, name=None):
+        self.name = name
+
+    def __enter__(self):
+        self.tstart = time.time()
+
+    def __exit__(self, type, value, traceback):
+        if selfname:
+            print('[%s]' % self.name,)
+
+        print('Elapsed:' '%s' % (time.time() - self.tstart))    

@@ -1,4 +1,6 @@
-Maandag 6 januari 2019
+# Process van D-place
+
+### Maandag 6 januari 2019
 Start van het groepsproject
 Case: AmstelHaege
 
@@ -83,28 +85,49 @@ situatie 60 huizen:
     large = 9 x 12 x 10 = 1.080
     totaal = 4.539
     
-Dinsdag 7 januari 2020
+### Dinsdag 7 januari 2020
 Technische aspecten besproken, objecten aangemaakt, begonnen met schrijven van het benodigde algoritme
 Random function afgemaakt, we hebben gekozen voor een soort grid systeem op basis van x,y coordinaten afgerond op hele getallen.
 Omdat de hoeken van een vrijstand eigenlijk afgerond zijn (pythagoras) bepalen wij nu dat het mogelijk is een huis te plaatsen op
 datzelfde exacte punt omdat hier in de werkelijkheid geen verplichte vrijstand meer is (afstand is groter) maar we dit nog niet
 visualiseren omdat dit momenteel makkelijker te programmeren moet zijn
 
-Woensdag 8 januari 2020
+### Woensdag 8 januari 2020
 Voortgangs gesprek en presentaties gehad, we wilde het probleem ook wiskundig oplossen ons werd aangeraden om dit (nog) niet te doen en het probleem eerst echt random aan te pakken. Ons idee was om eerst te beginnen met de grote huizen, maar dit is een geinformeerde random. één van de TA's was het hier niet mee eens en vind dat dit ook echt random zou moeten zijn.
 Begonnen met het verdiepen in matplotlib om data te kunnen visualiseren, functies geschreven voor het maken van de objecten op basis van de gegeven input. Daarnaast extra functies geschreven voor de house class om de waarde van de woning te kunnen bepalen, en de locaties die bij de woning horen. Naam attribuut toegevoegd omdat we de berekende afstand tot andere huizen al willen kunnen vastleggen bij het plaatsen van de woning zodat er uiteindelijk minder berekeningen dubbel uitgevoerd hoeven te worden. Daarnaast zijn we begonnen met de functie om te bepalen of een huis geplaatst mag worden
 
-Donderdag 9 januari
+### Donderdag 9 januari
 Begonnen met het schrijven voor het algoritme voor de kortste afstand. Daarnaast hebben we uitgezocht hoe wij onze oplossing kunnen visualiseren en hoe de beste oplossing vervolgens naar een apart file geschreven kan worden.
 
-Vrijdag 10 januari
+### Vrijdag 10 januari
 Bugs gefixed in het huidige programma, basis visualisatie gemaakt zonder koppeling naar ons algoritme
 
-Maandag 13 januari
+### Maandag 13 januari
 Huidige random is nog niet af, gebrainstormt over hoe we de random beter kunnen maken voor betere oplossingen
 
-dinsdag 14 januari
+### Dinsdag 14 januari
 -water object
 -if statement
 -visualisatie
-- kaarten toevoegen
+-kaarten toevoegen
+
+### Woensdag 15 januari
+-Random werkt op dit moment bijna, alleen soms wordt er nog een huis in water geplaatst
+
+
+### Donderdag 16 januari
+-Nagedacht over ons volgende algoritme, we zijn op het idee gekomen om na het random algoritme per huis te kijken voor elke locatie op ons grid of de totale waarde van de map groter is. Als dit het geval is wordt het huis op de locatie geplaats met een grotere totale waarde. Zo gaat dit algoritme elke huis langs, zodat de totale waarde van de map na de random hoger wordt. Dit algoritme is een ascending hill climb.er
+
+### Vrijdag 17 januari
+-Na het testen van ons hill climber algoritme kwamen we erachter dat ons random algoritme een enkele keer een medium huis in het water plaats. Na testen van de code en debuggen, kwamen we erachter dat we een kleine fout hadden gemaakt in de hoogte en breedte, omdat we die hadden omgedraaid. Nadat we dit hadden aangepast, werkte ons random volledig en konden we door met het volgende algoritme. In eerste istantie plaatste ons volgende algoritme alle huizen helemaals links onder. Het algoritme itereerde dus over de punten van de grid en begon bij (0,0). Het probleem was echter dat het algoritme gelijk alle huizen hier plaatsten zonder te kijken of er huizen overlappen.
+
+### Maandag 20 januari
+
+
+### Dinsdag 21 januari
+
+### Woensdag 22 januri
+
+### Donderdag 23 januari
+
+### Vrijdag 24 januari

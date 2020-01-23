@@ -1,4 +1,3 @@
-
 import csv
 
 def write_solution_down(total_value_map, all_houses, number_of_houses, all_water_objects, chosen_map):
