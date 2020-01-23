@@ -36,7 +36,8 @@ Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaat
 
 Overzicht van de drie mappen: <br>
 
-<img src="https://user-images.githubusercontent.com/46574470/72994312-2c706000-3df7-11ea-9711-d6041dcdca46.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/46574470/72994319-2ed2ba00-3df7-11ea-8e52-8acb770dd803.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/46574470/72994327-31cdaa80-3df7-11ea-838b-2d978281ee4a.png" width="30%"></img> 
+<img src="https://user-images.githubusercontent.com/46574470/72994312-2c706000-3df7-11ea-9711-d6041dcdca46.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/46574470/72994327-31cdaa80-3df7-11ea-838b-2d978281ee4a.png" width="30%"></img> 
+<img src="https://user-images.githubusercontent.com/46574470/72994319-2ed2ba00-3df7-11ea-8e52-8acb770dd803.png" width="30%"></img>
 
 
 
