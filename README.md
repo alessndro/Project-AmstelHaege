@@ -37,7 +37,7 @@ Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaat
 Overzicht van de drie mappen: <br>
 
 ![map 1](/doc/1.jpg){ width=50% }
-![map 1](/doc/1.jpg | width=50)
+![map 1](/doc/1.jpg =100x100)
 
 
 
