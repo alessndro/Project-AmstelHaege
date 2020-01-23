@@ -37,9 +37,9 @@ Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaat
 Overzicht van de drie mappen: <br>
 
 <p float="left">
-  <img src="./doc/map1.png" width="100" />
-  <img src="./doc/map2.png" width="100" /> 
-  <img src="./doc/map3.png" width="100" />
+  <img src="./doc/1.jpg" width="100" />
+  <img src="./doc/2.jpg" width="100" /> 
+  <img src="./doc/map3.jpg" width="100" />
 </p>
 
 Overzicht van de verschillende algoritmes:
