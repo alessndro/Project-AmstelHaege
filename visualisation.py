@@ -56,8 +56,7 @@ def visualisation_plot():
         coordinate = float(coordinate)
         yy.append(coordinate)
         
-    print(xx)
-    print(yy)
+ 
     plt.scatter(xx,yy, color='black', marker='o')        
     plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
     plt.show()
