@@ -36,18 +36,11 @@ Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaat
 
 Overzicht van de drie mappen: <br>
 
-![map 1]([image-1] =200x)
+![map 1](/doc/1.jpg){ width=50% }
+![map 1](/doc/1.jpg | width=50)
 
-![map 2]([image-2] =200x)
 
-![map 3]([image-3] =200x)
-![map 1](/doc/1.jpg)
 
-![map 1][image-1 =200x]
-
-![map 2][image-2 =200x]
-
-![map 3][image-3 =200x]
 
 Overzicht van de verschillende algoritmes:
 - Gebruiker kan algoritme 1 selecteren voor een **random_algoritme**.
