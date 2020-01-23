@@ -35,8 +35,8 @@ python main.py run
 Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaatsen. Daarna kan de gebruiker een keuze maken tussen de drie verschillende mappen en welk algoritme hij/zij wilt gebruiken.
 
 Overzicht van de drie mappen: <br>
-<img scr="map1.png" width="200"/> <img src="map2.png" width="200"/> <img src="map3.png" width="200"/> 
-(doc/)
+<img src="map1.png") width="200"/> <img src="map2.png" width="200"/> <img src="map3.png" width="200"/> 
+(doc/map1.png)
 
 Overzicht van de verschillende algoritmes:
 - Gebruiker kan algoritme 1 selecteren voor een **random_algoritme**.
