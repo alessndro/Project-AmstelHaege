@@ -42,6 +42,11 @@ Overzicht van de drie mappen: <br>
 
 ![map 3]([image-3] =200x)
 
+![map 1][image-1 =200x]
+
+![map 2][image-2 =200x]
+
+![map 3][image-3 =200x]
 
 Overzicht van de verschillende algoritmes:
 - Gebruiker kan algoritme 1 selecteren voor een **random_algoritme**.
