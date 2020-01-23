@@ -41,7 +41,7 @@ Overzicht van de drie mappen: <br>
 ![map 2]([image-2] =200x)
 
 ![map 3]([image-3] =200x)
-![Kitten](/doc/1.jpg){ width=50% }
+![Kitten](/doc/1.jpg){ width=25% }
 
 ![map 1][image-1 =200x]
 
