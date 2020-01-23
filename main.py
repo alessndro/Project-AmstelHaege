@@ -1,7 +1,8 @@
 from models import House, Water
 from random import seed
 from random import random
-from helpers_functions.py import place_house, distance_berekening, randomizer, ratio_houses, create_house_object, create_water_object
+from helpers_functions import place_house, distance_berekening, randomizer, ratio_houses, create_house_object, create_water_object
+from algorithms import random_algoritme, randomizer_algorithm, ascending_hillclimber, greedy_algoritme, swap_houses
 from visualisation import visualisation, visualisation_plot
 from writer import write_progress, write_progress_run
 import _random
@@ -50,9 +51,9 @@ def main():
     # RANDOM 
     #############################################################################
     if algoritme == 1:
+        count = 0
         for i in range(1):
-            print(count)
-            all_houses_dic, total_value, waters = random_algoritme(number_of_houses, map_number)
+            all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
             write_progress(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
             write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
             if total_value > total_value_map:
@@ -65,6 +66,7 @@ def main():
     # ASCENDING HILLCLIMBER
     ##############################################################################
     if algoritme == 2:
+        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
         for item in all_houses.values():
             for house in item:
                 all_houses_dic, total_value = ascending_hillclimber(house=house, all_houses=all_houses, waters=waters, total_value_map=total_value_map)
@@ -83,18 +85,18 @@ def main():
         waters = create_water_object(map_number)
 
         # slaat de lijsten op in de dictionairy
-        all_houses["small"] = small_houses
-        all_houses["medium"] = medium_houses
-        all_houses["large"] = large_houses
+        all_houses_dic["small"] = small_houses
+        all_houses_dic["medium"] = medium_houses
+        all_houses_dic["large"] = large_houses
 
         # loop door alle huizen en plaats deze op de meest gunstige plek
-        for house in all_houses["large"]:
-            all_houses_dic, total_value = greedy_algoritme(house, all_houses, waters)
-
-        for house in all_houses["medium"]:
+        for house in all_houses_dic["large"]:
             all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
 
-        for house in all_houses["small"]:
+        for house in all_houses_dic["medium"]:
+            all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
+
+        for house in all_houses_dic["small"]:
             all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
 
     ################################################################################
@@ -118,8 +120,8 @@ def main():
     visualisation(all_houses=all_houses_dic, waters=waters) 
     elap = time.time() - t
     visualisation_plot()
-    print (total_value)
-    print(elap)
+    print("TOTAL VALUE MAP: ",total_value)
+    print("RUN TIME: ", elap)
     
     
 def algoritme3(house, all_houses, waters, total_value_map):

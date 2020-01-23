@@ -1,5 +1,4 @@
-from helpers_functions.py import *
-
+from helpers_functions import *
 def random_algoritme(number_of_houses, map_number):
     '''Random algorithm, all houses are assigned a spot on a random location '''
 
@@ -112,7 +111,7 @@ def ascending_hillclimber(house, all_houses, waters, total_value_map):
     
 def greedy_algoritme(house, all_houses, waters):
 
-    algoritme(house, all_houses, waters)
+    randomizer_algorithm(house, all_houses, waters)
     house.extra_meters()
     house.totalprice()
 
@@ -163,7 +162,7 @@ def greedy_algoritme(house, all_houses, waters):
             
     return all_houses, total_value_map_NEW
 
-    def swap_houses(house, all_houses, waters, total_value_map):
+def swap_houses(house, all_houses, waters, total_value_map):
     """swapt huizen en kijkt of de totale waarde verandert"""
     total_value_map_NEW = total_value_map
     selected_house = house

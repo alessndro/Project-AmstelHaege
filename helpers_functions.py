@@ -1,3 +1,15 @@
+from models import House, Water
+from random import seed
+from random import random
+import math
+
+#constants
+RATIO_SMALL = 0.6
+RATIO_MEDIUM = 0.25
+RATIO_LARGE = 0.15
+MAXIMUM_HEIGHT = 180
+MAXIMUM_WIDTH = 160
+WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def place_house(selected_house, all_houses, waters):
     '''Bepaald of een huis op de gekozen locate geplaatst kan worden '''

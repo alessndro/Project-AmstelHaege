@@ -1,8 +1,16 @@
 # Project-AmstelHaege
 
+## Introductie
 Na jarenlang getouwtrek is de knoop eindelijk doorgehakt: er komt een nieuwe woonwijk in de Duivendrechtse polder, net ten noorden van Ouderkerk aan de Amstel. De huisjes zijn bedoeld voor het midden- en bovensegment van de markt, met name expats en hoogopgeleide werknemers actief op de Amsterdamse Zuidas.
 
 Omdat de Duivenderechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de 20-huizenvariant, de 40-huizenvariant en de 60-huizenvariant. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
+
+Wij als **D-Place** zijn aangewezen door de gemeente om de wijk in te richten. Wij zullen voor de drie verschillende mappen een 20, 40 en 60-huizenvariant opleveren. Voor alle drie de mappen zijn er vaste restricites.
+
+### Restricties
+* De wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons
+* Huizen in de wijk overlappen niet met elkaar, waarbij ze wel verplichte vrijstand mogen delen
+* Huizen vallen niet buiten de map van 160 x 180 meter, waarbij de verplichte vrijstand van de huizen binnen de map moet vallen en de extra vrijstand wel buiten de map kan vallen
 
 ## Installatie
 
@@ -26,6 +34,9 @@ python main.py run
 ```
 Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaatsen. Daarna kan de gebruiker een keuze maken tussen de drie verschillende mappen en welk algoritme hij/zij wilt gebruiken.
 
+Overzicht van de drie mappen
+<img src="doc/map1.png" width="283"/> <img src="doc/map2.png" width="283"/> <img src="doc/map3.png" width="283"/> 
+
 Overzicht van de verschillende algoritmes:
 - Gebruiker kan algoritme 1 selecteren voor een **random_algoritme**.
 - Gebruiker kan algoritme 2 selecteren voor een **ascending_hillclimber**.
@@ -48,9 +59,9 @@ Het swaphouses algoritme vergelijkt één huis met al de andere huizen. Het algo
 
 ## Contact
 
-Alessandro Degenkamp - Alessandrodegenkamp@hotmail.com
-Kiara Evers - k.s.evers@hotmail.com
-Daniel Siha - daniel.siha@gmail.com
+Alessandro Degenkamp - Alessandrodegenkamp@hotmail.com <br>
+Kiara Evers - k.s.evers@hotmail.com <br>
+Daniel Siha - daniel.siha@gmail.com <br>
 
 Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.com/alessndro/Project-AmstelHaege)
 
