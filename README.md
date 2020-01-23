@@ -1,5 +1,9 @@
 # Project-AmstelHaege
 
+Na jarenlang getouwtrek is de knoop eindelijk doorgehakt: er komt een nieuwe woonwijk in de Duivendrechtse polder, net ten noorden van Ouderkerk aan de Amstel. De huisjes zijn bedoeld voor het midden- en bovensegment van de markt, met name expats en hoogopgeleide werknemers actief op de Amsterdamse Zuidas.
+
+Omdat de Duivenderechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de 20-huizenvariant, de 40-huizenvariant en de 60-huizenvariant. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
+
 ## Installatie
 
 Dit project is geschreven in **Python 3.7**.
@@ -8,6 +12,11 @@ Deze packages zijn te installeren door het runnen van het volgende commando:
 ```
 pip3 install -r requirements.txt
 ```
+
+## Versies
+* Python 3.7.1 klopt deze versie?
+* Matplotlib 3.0.2 klopt deze versie?
+* GitHub
 
 ## Gebruik
 
@@ -23,6 +32,17 @@ Overzicht van de verschillende algoritmes:
 - Gebruiker kan algoritme 3 selecteren voor een **greedy_algoritme**.
 - Gebruiker kan algoritme 4 selecteren voor een **swap_houses**.
 
+## Hoe het werkt
+
+### Random
+Het random algoritme selecteert een random coördinaat voor elk huis, namelijk een x en een y. Er wordt eerst gecheckt of dit coördinaat binnen de map valt. Vervolgens checkt het algoritme of op het coördinaat een huis geplaatst kan worden. De functie place_house wordt hiervoor gebruikt. Deze functie checkt of er een van de vier hoeken van het huis binnen de coördinaten van het water valt en of de afstand van het dichtbijzijnde huis buiten de verplichte vrijstand van beide huizen staat.
+
+### Ascending hillclimber
+
+### Greedy
+
+### Swaphouses
+
 ## Contact
 
 Alessandro Degenkamp - Alessandrodegenkamp@hotmail.com
@@ -30,6 +50,9 @@ Kiara Evers -
 Daniel Siha - 
 
 Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.com/alessndro/Project-AmstelHaege)
+
+## toekomstig werk
+- kijken naar advanced versie --> water plaatzen
 
 ## License
 
