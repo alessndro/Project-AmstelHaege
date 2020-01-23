@@ -24,11 +24,11 @@ WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
 
+    # bepaalde de totale run-time van het programma
     t = time.time()
-    #script zonder plot
     elap = time.time() - t
 
-    # ask user for number of houses to be placed
+    # vraagt om input van gebruiker, over welke kaart, hoeveel huizen en welk algoritme zij willen uitvoeren
     while True:
         number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
 
@@ -36,9 +36,11 @@ def main():
 
         algoritme = int(input("Which algorithm would you like to use?  press 1 for random algorithm, 2 for ascending hillclimber, 3 for greedy, 4 for swappinghouses"))
         
+        # als de juiste waarden worden gekozen, begin het programma
         if (number_of_houses == 20 or number_of_houses == 40 or number_of_houses == 60) and (map_number > 0 and map_number <= 3) and algoritme > 0 and algoritme < 5:
             break
 
+    # initialiseer de variabelen die benodigd zijn voor het runnen
     all_houses_dic = {}
     total_value_map = 0
     total_value = 0
@@ -71,20 +73,21 @@ def main():
     # VOOR GREEDY
     ##############################################################################
     if algoritme == 3:
-        # determine division houses
+        # bepaal de verdeling van de huizen
         number_small, number_medium, number_large = ratio_houses(number_of_houses)
 
-        # create list of objects
+        # creeert lijsten met objecten van de juiste grootte
         small_houses = create_house_object(number_small, "small")
         medium_houses = create_house_object(number_medium, "medium")
         large_houses = create_house_object(number_large, "large")
         waters = create_water_object(map_number)
 
-        # save lists in dictionary
+        # slaat de lijsten op in de dictionairy
         all_houses["small"] = small_houses
         all_houses["medium"] = medium_houses
         all_houses["large"] = large_houses
 
+        # loop door alle huizen en plaats deze op de meest gunstige plek
         for house in all_houses["large"]:
             all_houses_dic, total_value = greedy_algoritme(house, all_houses, waters)
 

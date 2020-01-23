@@ -38,16 +38,19 @@ Overzicht van de verschillende algoritmes:
 Het random algoritme selecteert een random coördinaat voor elk huis, namelijk een x en een y. Er wordt eerst gecheckt of dit coördinaat binnen de map valt. Vervolgens checkt het algoritme of op het coördinaat een huis geplaatst kan worden. De functie place_house wordt hiervoor gebruikt. Deze functie checkt of er een van de vier hoeken van het huis binnen de coördinaten van het water valt en of de afstand van het dichtbijzijnde huis buiten de verplichte vrijstand van beide huizen staat.
 
 ### Ascending hillclimber
+Het ascending hillclimber algoritme itereert over alle huizen die al geplaatst zijn door het greedy of random algoritme. Voor elk huis gaat het algoritme alle punten van het x en y grid af, terwijl hij checkt of de totale waarde van de map toeneemt bij het plaatsen op een nieuwe locatie. Als de totale waarde van de map toeneeemt wordt deze als nieuwe totale waarde geaccepteerd. Als de totale waarde lager wordt, plaats het algoritme het huis terug naar de oude locatie en gaat naar het volgende punt op het x en y grid.
 
 ### Greedy
+Het greedy algoritme plaats alle huizen eerst op een random locatie. Vervolgens gaat het algoritme direct zoeken naar een betere locatie voor dat huis, kijkend naar de totale waarde van de map. Het algoritme gaat zo alle huizen af en plaats het huis dus per plaatsing op de locatie die het meeste opbrengt.
 
-### Swaphouses
+### Swaphouses 
+Het swaphouses algoritme vergelijkt één huis met al de andere huizen. Het algoritme slaat eerst de locaties van beide huizen op om deze vervolgens te ruilen. Het algoritme checkt vervolgens of beide huizen geplaatst kunnen worden op de nieuwe locaties. Als dit het geval is, wordt de nieuwe totale waarde van de map berekend. Als dit meer is, wordt deze nieuwe waarden geaccepteerd en blijven de huizen op de nieuwe locatie staan. Als een van de huizen niet geplaatst kan worden op de nieuwe locatie of de waarde van de totale map wordt niet hoger, worden de huizen weer op de oude locatie geplaatst.
 
 ## Contact
 
 Alessandro Degenkamp - Alessandrodegenkamp@hotmail.com
-Kiara Evers -
-Daniel Siha - 
+Kiara Evers - k.s.evers@hotmail.com
+Daniel Siha - daniel.siha@gmail.com
 
 Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.com/alessndro/Project-AmstelHaege)
 
@@ -56,7 +59,7 @@ Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.
 
 ## License
 
-Copyright 2019 alle rechten voorbehouden
+Copyright 2020 alle rechten voorbehouden
 
 
 
