@@ -1,4 +1,5 @@
 from helpers_functions import *
+
 def random_algoritme(number_of_houses, map_number):
     '''Random algorithm, all houses are assigned a spot on a random location '''
 
@@ -56,7 +57,6 @@ def randomizer_algorithm(house, all_houses, waters):
             house.placed = True
             break
 
-
 def ascending_hillclimber(house, all_houses, waters, total_value_map):
     ''' Ascending hillclimber plaatst huizen op een nieuwe locatie afhankelijk van totale waarde kaart '''
     total_value_map_NEW = total_value_map
@@ -107,7 +107,6 @@ def ascending_hillclimber(house, all_houses, waters, total_value_map):
                                 houses.totalprice()
             
     return all_houses, total_value_map_NEW
-
     
 def greedy_algoritme(house, all_houses, waters):
 
@@ -162,7 +161,7 @@ def greedy_algoritme(house, all_houses, waters):
             
     return all_houses, total_value_map_NEW
 
-def swap_houses(house, all_houses, waters, total_value_map):
+def swap_houses(house, all_houses, waters, total_value_map, algoritme):
     """swapt huizen en kijkt of de totale waarde verandert"""
     total_value_map_NEW = total_value_map
     selected_house = house
@@ -179,6 +178,11 @@ def swap_houses(house, all_houses, waters, total_value_map):
 
                 selected_house.location(temp_placed_bl)
                 
+                if algoritme == 6:
+                    swap = house.width
+                    house.width = house.length
+                    house.length = swap
+                    house.location(house.bottom_left)
                 if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:                  
                     # bereken nieuw waarde map, waarin huis is verplaatst
                     total_value_map_temp = 0
@@ -192,6 +196,11 @@ def swap_houses(house, all_houses, waters, total_value_map):
                         total_value_map_NEW = total_value_map_temp
                     # als waarde niet hoger is verander naar oude locatie
                     else:
+                        if algoritme == 6:
+                            house.length = house.width
+                            house.width = swap
+                            house.location(house.bottom_left)
+                        placed_house.location(temp_placed_bl)
                         placed_house.location(temp_placed_bl)
                         selected_house.location(temp_selected_bl)
                         if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:
@@ -201,6 +210,10 @@ def swap_houses(house, all_houses, waters, total_value_map):
                                     house.totalprice()
                     
                 else:
+                    if algoritme == 6:
+                        house.length = house.width
+                        house.width = swap
+                        house.location(house.bottom_left)
                     placed_house.location(temp_placed_bl)
                     selected_house.location(temp_selected_bl)
                     if place_house(selected_house, all_houses, waters) == True and place_house(placed_house, all_houses, waters) == True:
@@ -208,5 +221,56 @@ def swap_houses(house, all_houses, waters, total_value_map):
                             for house in item:
                                 house.extra_meters()
                                 house.totalprice()
+
+    return all_houses, total_value_map_NEW
+
+def random_ascending_hillclimber(house, all_houses, waters, total_value_map):
+    """pakt random 100 punten en kijkt of de totale waarde hoger wordt"""
+    total_value_map_NEW = total_value_map
+
+    # check in welke range het huis geplaats kan worden, niet kijkend naar water of andere 
+    rangex = MAXIMUM_WIDTH - house.width
+    rangey = MAXIMUM_HEIGHT - house.length
+
+    for x in range(1000):
+
+        randomizex = 0 + rangex * random()
+        randomizey = 0 + rangey * random()
+
+        tempx = house.bottom_left[0]
+        tempy = house.bottom_left[1]
+        # save cordinates house.bottom_left
+        bottom_left = (randomizex,randomizey)
+        # change cordinates of bl to new location
+        house.location(bottom_left)
+        # if you can place house on new location
+        if place_house(house, all_houses, waters) == True:
+            # bereken nieuw waarde map, waarin huis is verplaatst
+            total_value_map_temp = 0
+            for item in all_houses.values():
+                for house in item:
+                    house.extra_meters()
+                    total_value_map_temp += house.totalprice()
+
+            # als waarde met nieuwe locatie hoger is, verander deze
+            if total_value_map_NEW < total_value_map_temp:
+                total_value_map_NEW = total_value_map_temp
+            # als waarde niet hoger is verander naar oude locatie
+            else:
+                bottom_left = (tempx,tempy)
+                house.location(bottom_left)
+                if place_house(house, all_houses, waters) == True:
+                    for item in all_houses.values():
+                        for houses in item:
+                            houses.extra_meters()
+                            houses.totalprice()
+        else:
+            bottom_left = (tempx,tempy)
+            house.location(bottom_left)
+            if place_house(house, all_houses, waters) == True:
+                    for item in all_houses.values():
+                        for houses in item:
+                            houses.extra_meters()
+                            houses.totalprice()
 
     return all_houses, total_value_map_NEW

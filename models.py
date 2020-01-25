@@ -1,5 +1,6 @@
 import math
 import time
+
 class House:
     def __init__(self, name, size, start_value, obligated_space, rate, length, width):
         self.name = name
@@ -17,7 +18,6 @@ class House:
         self.total_value = None
         self.extra_space = 0 
         self.neighbours = {}
-        self.added_value = None
         self.total_price = None
         self.shortest_distance = None
 
@@ -49,10 +49,6 @@ class House:
         total_rate = (self.rate * self.extra_space) + 1
         self.total_price = self.start_value * total_rate
         return self.total_price
-
-    def addedvalue(self):
-        self.added_value = total_price - start_value
-        return self.added_value
 
     def __str__(self):
         return f"{self.name}, {self.size}, {self.placed} {self.bottom_left}"

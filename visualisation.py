@@ -26,11 +26,11 @@ def visualisation(all_houses, waters):
                 yy.append(house.bottom_left[1])
                 tekst.append(str(house.name))
                 if house.size == "small":
-                    rectangle = plt.Rectangle(house.bottom_left, 8, 8, fc='purple',ec="green", linewidth=2)
+                    rectangle = plt.Rectangle(house.bottom_left, house.width, house.length, fc='purple',ec="green", linewidth=2)
                 if house.size == "medium":
-                    rectangle = plt.Rectangle(house.bottom_left, 11, 7, fc='yellow',ec="green", linewidth=3,)
+                    rectangle = plt.Rectangle(house.bottom_left, house.width, house.length, fc='yellow',ec="green", linewidth=3)
                 if house.size == "large":
-                    rectangle = plt.Rectangle(house.bottom_left, 12, 10, fc='red',ec="green", linewidth=6)       
+                    rectangle = plt.Rectangle(house.bottom_left, house.width, house.length, fc='red',ec="green", linewidth=6)       
                 plt.gca().add_patch(rectangle)
 
 
@@ -57,6 +57,16 @@ def visualisation_plot():
         yy.append(coordinate)
         
  
+    plt.scatter(xx,yy, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
+    plt.scatter(xx,yy, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
+    plt.scatter(xx,yy, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
+    plt.scatter(xx,yy, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
+    plt.scatter(xx,yy, color='black', marker='o')        
+    plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
     plt.scatter(xx,yy, color='black', marker='o')        
     plt.title('Returns of number_of_houses houses in map map_number', fontsize=15)
     plt.scatter(xx,yy, color='black', marker='o')        
