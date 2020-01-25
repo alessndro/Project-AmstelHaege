@@ -93,35 +93,36 @@ datzelfde exacte punt omdat hier in de werkelijkheid geen verplichte vrijstand m
 visualiseren omdat dit momenteel makkelijker te programmeren moet zijn
 
 ### Woensdag 8 januari 2020
-Voortgangs gesprek en presentaties gehad, we wilde het probleem ook wiskundig oplossen ons werd aangeraden om dit (nog) niet te doen en het probleem eerst echt random aan te pakken. Ons idee was om eerst te beginnen met de grote huizen, maar dit is een geinformeerde random. één van de TA's was het hier niet mee eens en vind dat dit ook echt random zou moeten zijn.
-Begonnen met het verdiepen in matplotlib om data te kunnen visualiseren, functies geschreven voor het maken van de objecten op basis van de gegeven input. Daarnaast extra functies geschreven voor de house class om de waarde van de woning te kunnen bepalen, en de locaties die bij de woning horen. Naam attribuut toegevoegd omdat we de berekende afstand tot andere huizen al willen kunnen vastleggen bij het plaatsen van de woning zodat er uiteindelijk minder berekeningen dubbel uitgevoerd hoeven te worden. Daarnaast zijn we begonnen met de functie om te bepalen of een huis geplaatst mag worden
+Voortgangs gesprek en presentaties gehad, we wilde het probleem ook wiskundig oplossen ons werd aangeraden om dit (nog) niet te doen en het probleem eerst echt random aan te pakken. Ons idee was om eerst te beginnen met de grote huizen, maar dit is een geinformeerde random. Eén van de TA's was het hier niet mee eens en vind dat dit ook echt random zou moeten zijn. Begonnen met het verdiepen in matplotlib om data te kunnen visualiseren, functies geschreven voor het maken van de objecten op basis van de gegeven input. Daarnaast extra functies geschreven voor de house class om de waarde van de woning te kunnen bepalen, en de locaties die bij de woning horen. Naam attribuut toegevoegd omdat we de berekende afstand tot andere huizen al willen kunnen vastleggen bij het plaatsen van de woning zodat er uiteindelijk minder berekeningen dubbel uitgevoerd hoeven te worden. Daarnaast zijn we begonnen met de functie om te bepalen of een huis geplaatst mag worden
 
 ### Donderdag 9 januari
-Begonnen met het schrijven voor het algoritme voor de kortste afstand. Daarnaast hebben we uitgezocht hoe wij onze oplossing kunnen visualiseren en hoe de beste oplossing vervolgens naar een apart file geschreven kan worden.
+Begonnen met het schrijven voor het algoritme voor de kortste afstand. Daarnaast hebben we uitgezocht hoe wij onze oplossing kunnen visualiseren en hoe de beste oplossing vervolgens naar een apart file geschreven kan worden. De afstand tot andere huizen kunnen we eerst het beste berekenen met if-statements die gebasseerd zijn op de locatie van het ene huis ten opzichte van het andere huis Als bijvoorbeeld een ander huis rechtsboven zit van het huis je vergelijkt, gebruik dan de rechter boven hoek van het huis dat je vergelijkt en de linker onder hoek van het andere huis. Vervolgens kan je de abc-formule gebruiken om de afstand te berekenen.
 
 ### Vrijdag 10 januari
-Bugs gefixed in het huidige programma, basis visualisatie gemaakt zonder koppeling naar ons algoritme
+Bugs gefixed in het huidige programma en de basis voor de visualisatie gemaakt zonder koppeling naar ons algoritme. We zijn nu in staat zelf huizen te maken op een map door coördinaten in te vullen.
 
 ### Maandag 13 januari
-Huidige random is nog niet af, gebrainstormt over hoe we de random beter kunnen maken voor betere oplossingen
+Het random algoritme dat we hebben geschreven werkt nog niet helemaal volledig. Vandaag hebben we vooral gebrainstormt over hoe we het random algoritme kunnen verbeteren, zodat we op een betere oplossing uitkomen.
 
 ### Dinsdag 14 januari
+Vandaag hebben we een functie gemaakt die water voor de drie verschillende mappen aanmaakt. We hebben uiteindelijke gekozen om voor verschillende mappen waterobjecten aan te maken, die bestaat uit de coördinaten van de vier hoeken van het water. Zo kunnen we vervolgens makkelijk checken of een huis binnen de coördinaten van water valt. Verder 
+
 -water object
 -if statement
 -visualisatie
 -kaarten toevoegen
 
 ### Woensdag 15 januari
--Random werkt op dit moment bijna, alleen soms wordt er nog een huis in water geplaatst
-
+De random kunnen we nu makkelijk testen, omdat onze visualtie nu goed werkt. Na testen zijn we erachter gekomen dat een huis soms voor een gedeelte in water wordt geplaatst. Dit was vooral het geval bij map 2. Dit is uiteindelijk opgelost, omdat we lengte en breedte hadden verwisselt.
 
 ### Donderdag 16 januari
--Nagedacht over ons volgende algoritme, we zijn op het idee gekomen om na het random algoritme per huis te kijken voor elke locatie op ons grid of de totale waarde van de map groter is. Als dit het geval is wordt het huis op de locatie geplaats met een grotere totale waarde. Zo gaat dit algoritme elke huis langs, zodat de totale waarde van de map na de random hoger wordt. Dit algoritme is een ascending hill climb.er
+Nagedacht over ons volgende algoritme, we zijn op het idee gekomen om na het random algoritme per huis te kijken voor elke locatie op ons grid of de totale waarde van de map groter is. Als dit het geval is wordt het huis op de locatie geplaats met een grotere totale waarde. Zo gaat dit algoritme elke huis langs, zodat de totale waarde van de map na de random hoger wordt. Dit algoritme is gebasseerd op een ascending hill climber.
 
 ### Vrijdag 17 januari
--Na het testen van ons hill climber algoritme kwamen we erachter dat ons random algoritme een enkele keer een medium huis in het water plaats. Na testen van de code en debuggen, kwamen we erachter dat we een kleine fout hadden gemaakt in de hoogte en breedte, omdat we die hadden omgedraaid. Nadat we dit hadden aangepast, werkte ons random volledig en konden we door met het volgende algoritme. In eerste istantie plaatste ons volgende algoritme alle huizen helemaals links onder. Het algoritme itereerde dus over de punten van de grid en begon bij (0,0). Het probleem was echter dat het algoritme gelijk alle huizen hier plaatsten zonder te kijken of er huizen overlappen.
+Na het testen van ons hill climber algoritme kwamen we erachter dat ons random algoritme een enkele keer een medium huis in het water plaats. Na testen van de code en debuggen, kwamen we erachter dat we een kleine fout hadden gemaakt in de hoogte en breedte, omdat we die hadden omgedraaid. Nadat we dit hadden aangepast, werkte ons random volledig en konden we door met het volgende algoritme. In eerste istantie plaatste ons volgende algoritme alle huizen helemaals links onder. Het algoritme itereerde dus over de punten van de grid en begon bij (0,0). Het probleem was echter dat het algoritme gelijk alle huizen hier plaatsten zonder te kijken of er huizen overlappen.
 
 ### Maandag 20 januari
+-greedy
 
 
 ### Dinsdag 21 januari
@@ -131,3 +132,12 @@ Huidige random is nog niet af, gebrainstormt over hoe we de random beter kunnen 
 ### Donderdag 23 januari
 
 ### Vrijdag 24 januari
+-werken aan readme
+- alle functies uit main weghalen en toeveogen aan helpers_functions
+
+
+### NOG AFMAKEN
+- comments
+- readme volledig afmaken
+- process volledig afmaken
+- afkortingen voor bottem_left, etc.
