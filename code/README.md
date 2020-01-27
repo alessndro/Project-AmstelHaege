@@ -1,0 +1,2 @@
+## Code
+In Code zijn de folder agloritmes en classes te vinden. Binnen algoritmes staat een python file met al onze verschillende algoritmes. In de classes folder staat een python file met onze verschillende classes die we hebben gebruikt voor dit project. Daarnaast staat in de folder code een writer voor onze resultaten.

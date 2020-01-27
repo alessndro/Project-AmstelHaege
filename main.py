@@ -1,5 +1,5 @@
 from models import House, Water
-from helpers_functions import place_house, distance_berekening, randomizer, ratio_houses, create_house_object, create_water_object
+from helpers_functions import *
 from algorithms import random_algoritme, randomizer_algorithm, ascending_hillclimber, greedy_algoritme, swap_houses, random_ascending_hillclimber
 from visualisation import visualisation, visualisation_plot
 from writer import write_progress, write_progress_run
@@ -7,11 +7,11 @@ import math
 import copy
 import time
 
-# Import the necessary packages and modules for matplotlib
+# importen van benodigde pakketten voor de visualisatie
 import matplotlib.pyplot as plt
 import numpy as np
 
-#constants
+# constante
 RATIO_SMALL = 0.6
 RATIO_MEDIUM = 0.25
 RATIO_LARGE = 0.15
@@ -36,11 +36,15 @@ def main():
 
     # RANDOM
     if algoritme == 1:
-        total_value, all_houses_dic, waters = random(algoritme, number_of_houses, map_number, total_value_map)
+        while True:
+            turns = int(input("Uit hoeveel keer wil je dat er een random gemaakt wordt? Enkel de gene met de hoogste waarde wordt weergeven"))
+            if turns > 0:
+                break
+        total_value, all_houses_dic, waters = random(number_of_houses=number_of_houses, map_number=map_number, turns=turns)
 
     # ASCENDING HILLCLIMBER
     if algoritme == 2:
-        total_value, all_houses_dic, waters = asceding_hillclimber_algoritme(number_of_houses=number_of_houses, map_number, all_houses=all_houses, waters = waters, total_value_map=total_value_map)
+        total_value, all_houses_dic, waters = asceding_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters = waters, total_value_map=total_value_map)
 
     # VOOR GREEDY
     if algoritme == 3:
@@ -48,23 +52,25 @@ def main():
 
     # VOOR SWAPPING HOUSES
     if algoritme == 4:    
-        total_value, all_houses_dic, waters = swapping_houses_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+        total_value, all_houses_dic, waters = swapping_houses_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
 
     # VOOR DOUBLE RANDOM 
     if algoritme == 5:
-        total_value, all_houses_dic, waters = random_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+        total_value, all_houses_dic, waters = random_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number)
 
     # SWAP HOUSES NA GREEDY
     if algoritme == 6:
         total_value, all_houses_dic, waters = swap_houses_after_greedy_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
         
 
-    # Visualisatie 
+    # visualisatie 
     visualisation_map()
     
     visualisation(all_houses=all_houses_dic, waters=waters) 
     elap = time.time() - t
     visualisation_plot()
+
+    # toont het resultaat van het programma
     print("TOTAL VALUE MAP: ",total_value)
     print("RUN TIME: ", elap)
     
