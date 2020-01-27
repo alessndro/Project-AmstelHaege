@@ -10,7 +10,7 @@ Wij als **D-Place** zijn aangewezen door de gemeente om de wijk in te richten. W
 ### Restricties
 * De wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons
 * Huizen in de wijk overlappen niet met elkaar, waarbij ze wel verplichte vrijstand mogen delen
-* Huizen vallen niet buiten de map van 160 x 180 meter, waarbij de verplichte vrijstand van de huizen binnen de map moet vallen en de extra vrijstand wel buiten de map kan vallen
+* Huizen vallen niet buiten de map van 160x180 meter, waarbij de verplichte vrijstand van de huizen binnen de map moet vallen en de extra vrijstand wel buiten de map of in water kan vallen
 
 ## Installatie
 
@@ -57,10 +57,10 @@ Het random algoritme selecteert een random coördinaat voor elk huis, bestaande 
 Het ascending hillclimber algoritme itereert over alle huizen die al geplaatst zijn door het greedy of random algoritme. Voor elk huis gaat het algoritme alle punten van het x en y grid af, terwijl hij checkt of de totale waarde van de map toeneemt bij het plaatsen op een nieuwe locatie. Als de totale waarde van de map toeneeemt wordt deze als nieuwe totale waarde geaccepteerd. Als de totale waarde lager wordt, plaats het algoritme het huis terug naar de oude locatie en gaat naar het volgende punt op het x en y grid.
 
 ### Greedy
-Het greedy algoritme plaats alle huizen eerst op een random locatie. Vervolgens gaat het algoritme direct zoeken naar een betere locatie voor dat huis, kijkend naar de totale waarde van de map. Het algoritme gaat zo alle huizen af en plaats dus per keer het huis op de locatie die het meeste opbrengt.
+Het greedy algoritme plaats eerst per keer een huis eerst op een random locatie. Vervolgens gaat het algoritme direct zoeken naar een betere locatie voor dat huis, kijkend naar de totale waarde van de map. Het algoritme gaat zo alle huizen af en plaats dus per keer het huis op de locatie die het meeste opbrengt.
 
 ### Swaphouses 
-Het swaphouses algoritme vergelijkt één huis met al de andere huizen. Het algoritme slaat eerst de locaties van beide huizen op om deze vervolgens te ruilen. Het algoritme checkt vervolgens of beide huizen geplaatst kunnen worden op de nieuwe locaties. Als dit het geval is, wordt de nieuwe totale waarde van de map berekend. Als dit meer is, wordt deze nieuwe waarden geaccepteerd en blijven de huizen op de nieuwe locatie staan. Als een van de huizen niet geplaatst kan worden op de nieuwe locatie of de waarde van de totale map wordt niet hoger, worden beide huizen weer op de oude locatie geplaatst.
+Het swaphouses algoritme vergelijkt één huis met al de andere huizen, waarbij het de coördinaten van de huizen ruilt. Het algoritme slaat eerst de locaties van beide huizen op om deze vervolgens te ruilen. Het algoritme checkt vervolgens of beide huizen geplaatst kunnen worden op de nieuwe locaties. Als dit het geval is, wordt de nieuwe totale waarde van de map berekend. Als dit meer is, wordt deze nieuwe waarde geaccepteerd en blijven de huizen op de nieuwe locatie staan. Als een van de huizen niet geplaatst kan worden op de nieuwe locatie of de waarde van de totale map wordt niet hoger, worden beide huizen weer op de oude locatie geplaatst.
 
 ## Contact
 
