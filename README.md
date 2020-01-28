@@ -5,7 +5,7 @@ Na jarenlang getouwtrek is de knoop eindelijk doorgehakt: er komt een nieuwe woo
 
 Omdat de Duivenderechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de 20-huizenvariant, de 40-huizenvariant en de 60-huizenvariant. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
 
-Wij als **D-Place** zijn aangewezen door de gemeente om de wijk in te richten. Wij zullen voor de drie verschillende mappen een 20, 40 en 60-huizenvariant opleveren. Voor alle drie de mappen zijn er vaste restricites.
+Wij als **D-Place** zijn aangewezen door de gemeente om de wijk in te richten. Wij zullen voor de drie verschillende mappen een 20, 40 en 60-huizenvariant opleveren. Voor alle drie de mappen zijn er vaste restricties.
 
 ### Restricties
 * De wijk bestaat voor 60% uit eengezinswoningen, 25% uit bungalows en 15% uit maisons.
@@ -57,7 +57,7 @@ Het random algoritme selecteert een random coördinaat voor elk huis, bestaande 
 Het ascending hillclimber algoritme itereert over alle huizen die al geplaatst zijn door het greedy of random algoritme. Voor elk huis gaat het algoritme alle punten van het x en y grid af, terwijl hij checkt of de totale waarde van de map toeneemt bij het plaatsen op een nieuwe locatie. Als de totale waarde van de map toeneeemt wordt deze als nieuwe totale waarde geaccepteerd. Als de totale waarde lager wordt, plaatst het algoritme het huis terug naar de oude locatie en gaat naar het volgende punt op het x en y grid.
 
 #### Random points ascending hillclimber
-Het ascending hillclimber itereert over voor alle huizen voor alle punten op het x en y grid. Omdat het algoritme relatief gezien veel tijd gebruikt voor het vinden van een oplossing hebben we een variant gemaakt die in plaats van alle punten langs gaat op het grid, een specifiek aantal punten pakt die random worden gegenereerd.
+Het ascending hillclimber itereert over alle huizen voor alle punten op het x en y grid. Omdat het algoritme relatief gezien veel tijd gebruikt voor het vinden van een oplossing hebben we een variant gemaakt die in plaats van alle punten langs gaat op het grid, een specifiek aantal punten pakt die random worden gegenereerd.
 
 ### Greedy
 Het greedy algoritme plaats eerst per keer een huis eerst op een random locatie. Vervolgens gaat het algoritme direct zoeken naar een betere locatie voor dat huis, kijkend naar de totale waarde van de map. Het algoritme gaat zo alle huizen af en plaats dus per keer het huis op de locatie die het meeste opbrengt.
