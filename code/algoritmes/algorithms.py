@@ -3,18 +3,18 @@
 #
 # Minor Programming 
 #
-# Kiara Shakira, Sander van bergen, Daniel Siha
+# Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat alle algoritmes de worden gebruikt in dit project
 ##########################################################################
 
-from helpers_functions import ratio_houses
+from hf import *
 
 def random_algoritme(number_of_houses, map_number):
     ''' Random algoritme, alle huizen worden toegewezen aan een plek op een random locatie '''
 
     # bepaal verdeling van huizen
-    number_small, number_medium, number_large = helpers_functions.ratio_houses(number_of_houses)
+    number_small, number_medium, number_large = ratio_houses(number_of_houses)
 
     # maak lijst van de huis objecten
     small_houses = create_house_object(number_small, "small")
@@ -326,3 +326,13 @@ def random_ascending_hillclimber(house, all_houses, waters, total_value_map):
                             houses.totalprice()
 
     return all_houses, total_value_map_NEW
+
+random_algoritme(1,1)
+
+def ratio_houses(number_of_houses):
+    '''Verdeelt het aantal huizen op basis van het aantal gekozen huizen naar verhouding van de gegeven ratio'''
+    small = int(RATIO_SMALL * number_of_houses)
+    medium = int(RATIO_MEDIUM * number_of_houses)
+    large = int(RATIO_LARGE * number_of_houses)
+    
+    return (small, medium, large)

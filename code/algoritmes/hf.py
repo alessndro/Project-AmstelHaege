@@ -3,14 +3,14 @@
 #
 # Minor Programming 
 #
-# Kiara Shakira, Sander van bergen, Daniel Siha
+# Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat alle functies die worden gebruikt in dit project
 ##########################################################################
 
-from code.classes.models import House, Water
+from code.models import House, Water
 from random import seed
-from algorithms import *
+from code.algoritmes.algorithms import *
 import math
 
 # constanten
@@ -115,6 +115,7 @@ def ratio_houses(number_of_houses):
     large = int(RATIO_LARGE * number_of_houses)
     
     return (small, medium, large)
+
 
 def create_house_object(house_size, house_sort):
     '''Maakt alle huis objecten aan voor het gegeven huis soort en vult deze met de basis informatie'''
