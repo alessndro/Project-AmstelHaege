@@ -1,14 +1,18 @@
 #########################################################################
 # classes.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat alle classes die worden gebruikt in dit project
 ##########################################################################
+
 import math
 import time
+
+# constante
+MAXIMALE_AFSTAND_KAART = 241
 
 class House:
     def __init__(self, name, size, start_value, obligated_space, rate, length, width):
@@ -31,30 +35,37 @@ class House:
         self.shortest_distance = None
 
     def location(self, bottom_left):
+        ''' Berekent de overige coördinaten op basis van de gegeven bottom_left
+         en de waardes die het huis heeft gekregen bij het aanmaken van het object '''
         self.bottom_left = bottom_left
         self.bottom_right = ((bottom_left[0] + self.width), bottom_left[1]) 
         self.top_left = (bottom_left[0], (bottom_left[1] + self.length))
         self.top_right = ((bottom_left[0] + self.width), (bottom_left[1] + self.length))
     
     def compared_space(self, neighbour, distance):
-        '''Berekend de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op'''
+        ''' Berekent de afstand tot andere huizen die al zijn geplaatst en slaat deze afstand op '''
         self.neighbours[neighbour.name] = math.floor(distance)
 
     def extra_meters(self):
-        shortest_distance = 241 #maximale afstand totale kaart
+        ''' Bekijkt welke afstand van de geregisteerde afstanden de kortste is en berekent 
+        daarmee hoeveel meer vrijstand de woning heeft '''
+        shortest_distance = MAXIMALE_AFSTAND_KAART
         object_shortest_distance = None
 
+        # slaat de korste afstand op 
         for tuples in self.neighbours.items():
             if tuples[1] < shortest_distance:
                 shortest_distance = tuples[1]
                 object_shortest_distance = tuples[0]
         
+        # berekent hoeveel afstand er over is naast de verplichte vrijstand
         self.shortest_distance = math.floor(shortest_distance)
 
         self.extra_space = shortest_distance - self.obligated_space
         
     
     def totalprice(self):
+        ''' Berekent de totale waarde van de woning met de extra vrijstand die de woning heeft '''
         total_rate = (self.rate * self.extra_space) + 1
         self.total_price = self.start_value * total_rate
         return self.total_price
@@ -73,17 +84,4 @@ class Water:
 
     def __str__(self):
         return f"{self.map, self.bottom_right}"
-
-
-class Timer(object):
-    def __init__(self, name=None):
-        self.name = name
-
-    def __enter__(self):
-        self.tstart = time.time()
-
-    def __exit__(self, type, value, traceback):
-        if selfname:
-            print('[%s]' % self.name,)
-
-        print('Elapsed:' '%s' % (time.time() - self.tstart))    
+    

@@ -1,12 +1,13 @@
 #########################################################################
 # ascending_hillclimber.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat het ascending hillclimber algoritme
 ##########################################################################
+
 from .random import *
 
 def asceding_hillclimber_algoritme(number_of_houses, map_number, all_houses, waters, total_value_map):

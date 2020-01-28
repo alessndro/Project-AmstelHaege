@@ -1,12 +1,13 @@
 #########################################################################
 # swapping_houses.py
 #
-# Minor Programming 
+# Minor programmeren 
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat het swap houses algoritme
 ##########################################################################
+
 from .hf import *
 from .random import random_algoritme
 import copy

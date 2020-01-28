@@ -1,7 +1,7 @@
 #########################################################################
 # hf.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
@@ -120,6 +120,7 @@ def create_house_object(house_size, house_sort):
     '''Maakt alle huis objecten aan voor het gegeven huis soort en vult deze met de basis informatie'''
     list_of_objects = []
     count = 0
+    # voegt alle gegeven waardes toe aan de objecten en maakt de objecten aan met unieke eigen naam
     if house_sort == "small":
         for i in range(house_size):
             name = "S" + str(count)

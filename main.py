@@ -1,7 +1,7 @@
 #########################################################################
 # main.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
@@ -53,10 +53,11 @@ def main():
         # RANDOM
         if algoritme == 1:
             while True:
-                turns = int(input("Uit hoeveel keer wil je dat er een random gemaakt wordt? Enkel de gene met de hoogste waarde wordt weergeven. \n"))
+                turns = int(input("Hoeveel keer wil je dat er een random gemaakt wordt? Enkel de gene met de hoogste waarde wordt weergeven. \n"))
                 if turns > 0:
                     break
-            total_value, all_houses_dic, waters = random_start(number_of_houses=number_of_houses, map_number=map_number, turns=turns)
+            total_value, all_houses_dic, waters = random_start(number_of_houses=number_of_houses, map_number=map_number, 
+            turns=turns, algoritme=algoritme)
 
         # bepaalde de totale run-time van het programma
         t = time.time()
@@ -77,19 +78,23 @@ def main():
             total_value, all_houses_dic, waters = swapping_houses_algoritme(number_of_houses=number_of_houses,
             map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
 
-        # VOOR DOUBLE RANDOM 
+        # VOOR RANDOM POINTS ASCENDING HILL CLIMBER 
         if algoritme == 5:
-            total_value, all_houses_dic, waters = random_points_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number)
+            total_value, all_houses_dic, waters = random_points_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, 
+            map_number=map_number)
 
         # SWAP HOUSES NA GREEDY
         if algoritme == 6:
-            total_value, all_houses_dic, waters = swap_houses_after_greedy_algoritme(number_of_houses=number_of_houses, map_number=map_number,
+            total_value, all_houses_dic, waters = swap_houses_after_greedy_algoritme(number_of_houses=number_of_houses, 
+            map_number=map_number,
             waters=waters, total_value_map=total_value_map, algoritme=algoritme)
         
         # noteert de resultaten
-        write_progress(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value, all_houses=all_houses_dic)
+        write_progress(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value, 
+        all_houses=all_houses_dic, algoritme=algoritme)
         if algoritme != 1:
-            write_progress_run(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value)
+            write_progress_run(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value, 
+            algoritme=algoritme)
 
         
         elap = time.time() - t
@@ -97,19 +102,15 @@ def main():
         visualisation(all_houses=all_houses_dic, waters=waters) 
         visualisation_plot(algoritme)
 
-        delete_progress_run()
-
         # toont het resultaat van het programma
         print("TOTAL VALUE MAP: ",total_value)
         print("RUN TIME: ", elap)
 
         beeindigen = int(input("Om het programma opnieuw te runnen toets 1, indien u niet verder gaat met het programma" + 
-                            " wordt process_run.csv geleegd. Wanneer u wel verder gaat wordt deze verder aangevuld. \n"))
+                            " wordt process_run.csv geleegd. Wanneer u wel verder gaat wordt deze verder aangevuld.\n"))
         if beeindigen != 1:
             delete_progress_run()
             break
         
 if __name__ == "__main__":
     main()
-
-

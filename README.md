@@ -30,7 +30,7 @@ pip3 install -r requirements.txt
 
 De code wordt uitgevoerd door het runnen van het volgende commando:
 ```
-python main.py run
+python main.py
 ```
 Vervolgens wordt de gebruiker gevraagd of hij/zij **20/40/60** huizen wilt plaatsen. Daarna kan de gebruiker een keuze maken tussen de drie verschillende mappen en welk algoritme hij/zij wilt gebruiken.
 
@@ -38,8 +38,6 @@ Overzicht van de drie mappen: <br>
 
 <img src="https://user-images.githubusercontent.com/46574470/72994312-2c706000-3df7-11ea-9711-d6041dcdca46.png" width="30%"></img> <img src="https://user-images.githubusercontent.com/46574470/72994327-31cdaa80-3df7-11ea-838b-2d978281ee4a.png" width="30%"></img> 
 <img src="https://user-images.githubusercontent.com/46574470/72994319-2ed2ba00-3df7-11ea-8e52-8acb770dd803.png" width="30%"></img>
-
-
 
 
 Overzicht van de verschillende algoritmes:
@@ -56,10 +54,10 @@ Overzicht van de verschillende algoritmes:
 Het random algoritme selecteert een random coördinaat voor elk huis, bestaande uit een x en een y. Allereest wordt gecheckt of dit coördinaat binnen de map valt. Vervolgens checkt het algoritme of op dit coördinaat een huis geplaatst kan worden. De functie place_house wordt hiervoor gebruikt. Deze functie controleert of niet een van de vier hoeken van het huis binnen de coördinaten van het water valt en of de afstand van het dichtbijzijnde huis buiten de verplichte vrijstand van beide huizen staat.
 
 ### Ascending hillclimber
-Het ascending hillclimber algoritme itereert over alle huizen die al geplaatst zijn door het greedy of random algoritme. Voor elk huis gaat het algoritme alle punten van het x en y grid af, terwijl hij checkt of de totale waarde van de map toeneemt bij het plaatsen op een nieuwe locatie. Als de totale waarde van de map toeneeemt wordt deze als nieuwe totale waarde geaccepteerd. Als de totale waarde lager wordt, plaats het algoritme het huis terug naar de oude locatie en gaat naar het volgende punt op het x en y grid.
+Het ascending hillclimber algoritme itereert over alle huizen die al geplaatst zijn door het greedy of random algoritme. Voor elk huis gaat het algoritme alle punten van het x en y grid af, terwijl hij checkt of de totale waarde van de map toeneemt bij het plaatsen op een nieuwe locatie. Als de totale waarde van de map toeneeemt wordt deze als nieuwe totale waarde geaccepteerd. Als de totale waarde lager wordt, plaatst het algoritme het huis terug naar de oude locatie en gaat naar het volgende punt op het x en y grid.
 
 #### Random points ascending hillclimber
-Het ascending hillclimber itereert over voor alle huizen voor alle punten op het x en y grid. Omdat het algoritme relatief gezien veel tijd gebruikt voor het vinden van een oplossing hebben we een variant gemaakt die in plaats van alle punten langs gaat, een specifiek aantal punten pakt die random worden gegenereerd.
+Het ascending hillclimber itereert over voor alle huizen voor alle punten op het x en y grid. Omdat het algoritme relatief gezien veel tijd gebruikt voor het vinden van een oplossing hebben we een variant gemaakt die in plaats van alle punten langs gaat op het grid, een specifiek aantal punten pakt die random worden gegenereerd.
 
 ### Greedy
 Het greedy algoritme plaats eerst per keer een huis eerst op een random locatie. Vervolgens gaat het algoritme direct zoeken naar een betere locatie voor dat huis, kijkend naar de totale waarde van de map. Het algoritme gaat zo alle huizen af en plaats dus per keer het huis op de locatie die het meeste opbrengt.
@@ -75,15 +73,13 @@ Daniel Siha - daniel.siha@gmail.com <br>
 
 Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.com/alessndro/Project-AmstelHaege)
 
-## toekomstig werk
+## Toekomstig werk
 
-- kijken naar advanced versie --> water plaatzen
+Mochten we nog meer tijd hebben om verder te gaan met dit project dan zullen wij ons richten op een simulated annealing algoritme dat ook slechtere waardes accepteerd, om vervolgens bij het plaatsen van de volgende huizen op een hogere totale waarde uit te kunnen komen.
 
-## License
+## Licensie
 
-Copyright 2020 alle rechten voorbehouden
-
-
+Copyright 2020 alle rechten voorbehouden.
 
 [image-1]:	doc/1.jpg
 [image-2]:	doc/2.jpg

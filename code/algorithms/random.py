@@ -1,24 +1,25 @@
 #########################################################################
 # random.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat het random algoritme
 ##########################################################################
+
 from .hf import *
 from code.writer import *
 import copy
 
-def random_start(number_of_houses, map_number, turns):
+def random_start(number_of_houses, map_number, turns, algoritme):
     ''' zorgt ervoor dat het random algorite x aantal keer wordt uitgevoerd '''
     total_value_map = 0
     for i in range(turns):
         # voert het algoritme uit
         all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
         # schrijft de resultaten van deze run op om dit te kunnen plotten
-        write_progress_run(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value)
+        write_progress_run(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value, algoritme=algoritme)
         # als de waarde hoger is dan de vorige waarde, sla deze op als nieuwe waarde
         if total_value > total_value_map:
             total_value_map = total_value

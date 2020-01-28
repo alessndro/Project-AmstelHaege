@@ -1,12 +1,13 @@
 #########################################################################
 # greedy.py
 #
-# Minor Programming 
+# Minor programmeren
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
 # Bevat het greedy algoritme
 ##########################################################################
+
 from .hf import *
 from .random import randomizer_algorithm
 
