@@ -175,7 +175,7 @@ def get_input():
         algoritme = int(input("Welk algoritme wilt u gebruiken? \n" +
         "1 for random algorithm \n"  + 
         "2 voor ascending hillclimber \n" +
-        "3 voor ascending greedy \n" +
+        "3 voor greedy \n" +
         "4 voor swappinghouses \n" +
         "5 voor random points ascending hillclimber \n" +
         "6 voor combinatie van greedy en swappinghouses waarbij ze ook 90 graden gedraaid kunnen worden \n" ))

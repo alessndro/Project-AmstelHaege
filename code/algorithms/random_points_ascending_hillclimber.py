@@ -35,17 +35,19 @@ def random_points_ascending_hillclimber(house, all_houses, waters, total_value_m
     rangey = MAXIMUM_HEIGHT - house.length
 
     for x in range(100):
-
+        # maak random x en y coördinaat
         randomizex = rangex * random()
         randomizey = rangey * random()
 
+        # bewaar oude locaties
         tempx = house.bottom_left[0]
         tempy = house.bottom_left[1]
-        # save cordinates house.bottom_left
+        
+        # verander locatie
         bottom_left = (randomizex,randomizey)
-        # change cordinates of bl to new location
         house.location(bottom_left)
-        # if you can place house on new location
+
+        # als je je huis op nieuwe locatie kan plaatsen
         if place_house(house, all_houses, waters) == True:
             # bereken nieuw waarde map, waarin huis is verplaatst
             total_value_map_temp = 0
@@ -57,7 +59,7 @@ def random_points_ascending_hillclimber(house, all_houses, waters, total_value_m
             # als waarde met nieuwe locatie hoger is, verander deze
             if total_value_map_NEW < total_value_map_temp:
                 total_value_map_NEW = total_value_map_temp
-            # als waarde niet hoger is verander naar oude locatie
+            # als waarde niet hoger is verander naar oude locatie en bereken weer totale waarde map
             else:
                 bottom_left = (tempx,tempy)
                 house.location(bottom_left)
@@ -66,6 +68,7 @@ def random_points_ascending_hillclimber(house, all_houses, waters, total_value_m
                         for houses in item:
                             houses.extra_meters()
                             houses.totalprice()
+        # als huis niet geplaats kan worden, verander naar oude locatie en bereken weer totale waarde map
         else:
             bottom_left = (tempx,tempy)
             house.location(bottom_left)
