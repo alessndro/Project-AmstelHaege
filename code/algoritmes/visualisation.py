@@ -1,3 +1,13 @@
+#########################################################################
+# visualisation.py
+#
+# Minor Programming 
+#
+# Kiara Shakira, Sander van bergen, Daniel Siha
+#
+# Bevat alle functies voor het visualiseren van de resultaten
+##########################################################################
+
 from matplotlib import pyplot as plt 
 from writer import read_progress_run, delete_progress_run
 import matplotlib.patches as patches

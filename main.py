@@ -1,5 +1,5 @@
-from models import House, Water
-from helpers_functions import *
+from code.classes.models import House, Water
+from code.algoritmes.helpers_functions import *
 from algorithms import random_algoritme, randomizer_algorithm, ascending_hillclimber, greedy_algoritme, swap_houses, random_ascending_hillclimber
 from visualisation import visualisation, visualisation_plot
 from writer import write_progress, write_progress_run

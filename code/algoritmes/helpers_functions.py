@@ -1,4 +1,14 @@
-from models import House, Water
+#########################################################################
+# helpers_functions.py
+#
+# Minor Programming 
+#
+# Kiara Shakira, Sander van bergen, Daniel Siha
+#
+# Bevat alle functies die worden gebruikt in dit project
+##########################################################################
+
+from code.classes.models import House, Water
 from random import seed
 from algorithms import *
 import math
