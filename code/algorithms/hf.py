@@ -1,16 +1,15 @@
 #########################################################################
-# helpers_functions.py
+# hf.py
 #
 # Minor Programming 
 #
 # Kiara Evers, Alessandro Degenkamp, Daniel Siha
 #
-# Bevat alle functies die worden gebruikt in dit project
+# Bevat alle hulp functies die worden gebruikt bij de algoritmes
 ##########################################################################
 
-from code.models import House, Water
-from random import seed
-from code.algoritmes.algorithms import *
+from code.classes.models import House, Water
+from random import seed, random
 import math
 
 # constanten
@@ -168,11 +167,17 @@ def get_input():
 
     # vraagt om input van gebruiker, over welke kaart, hoeveel huizen en welk algoritme zij willen uitvoeren
     while True:
-        number_of_houses = int(input("What are the amount of Houses 20, 40 or 60?"))
+        number_of_houses = int(input("Wat is het aantal huizen, 20, 40 of 60?: \n"))
 
-        map_number = int(input("Which map would you like to use? 1,2,3"))
+        map_number = int(input("Welke map wilt u gebruiken? 1,2,3: \n"))
 
-        algoritme = int(input("Which algorithm would you like to use?  press 1 for random algorithm, 2 for ascending hillclimber, 3 for greedy, 4 for swappinghouses, 5 for double random"))
+        algoritme = int(input("Welk algoritme wilt u gebruiken? \n" +
+        "1 for random algorithm \n"  + 
+        "2 voor ascending hillclimber \n" +
+        "3 voor ascending greedy \n" +
+        "4 voor swappinghouses \n" +
+        "5 voor random points ascending hillclimber \n" +
+        "6 voor combinatie van greedy en swappinghouses waarbij ze ook 90 graden gedraaid kunnen worden \n" ))
         
         # als de juiste waarden worden gekozen, begin het programma
         if (number_of_houses == 20 or number_of_houses == 40 or number_of_houses == 60) and (map_number > 0 and map_number <= 3) and algoritme > 0 and algoritme < 7:
@@ -180,130 +185,3 @@ def get_input():
         
     return number_of_houses, map_number, algoritme
 
-def random(number_of_houses, map_number, turns):
-    ''' zorgt ervoor dat het random algorite x aantal keer wordt uitgevoerd '''
-    total_value_map = 0
-    for i in range(turns):
-        # voert het algoritme uit
-        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
-        # houdt elke run van het algoritme bij, en de uitkomsten hiervan
-        write_progress(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
-        # schrijft de resultaten van deze run op om dit te kunnen plotten
-        write_progress_run(number_of_houses=number_of_houses, map_number=map_number, solution=count, total_value_map=total_value)
-        # als de waarde hoger is dan de vorige waarde, sla deze op als nieuwe waarde
-        if total_value > total_value_map:
-            total_value_map = total_value
-            all_houses_dic = copy.deepcopy(all_houses)
-    
-    return total_value, all_houses_dic, waters 
-        
-def asceding_hillclimber_algoritme(number_of_houses, map_number, all_houses, waters, total_value_map):
-    ''' zorgt ervoor dat er een ascending hillclimber wordt uitgevoerd '''
-    if algoritme == 2:
-        # plaatst alle huizen random op de kaart
-        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
-        
-        # verplaatst alle huizen, probeert elke mogelijke plek uit en bewaard de beste positie waarmee de waarde van de kaart hoger is
-        for item in all_houses.values():
-            for house in item:
-                all_houses_dic, total_value = ascending_hillclimber(house=house, all_houses=all_houses, waters=waters, total_value_map=total_value_map)  
-    
-    return total_value, all_houses_dic, waters
-
-def greedy(number_of_houses, map_number, all_houses, waters, total_value_map):
-    # bepaal de verdeling van de huizen
-    number_small, number_medium, number_large = ratio_houses(number_of_houses)
-
-    # creeert lijsten met objecten van de juiste grootte
-    small_houses = create_house_object(number_small, "small")
-    medium_houses = create_house_object(number_medium, "medium")
-    large_houses = create_house_object(number_large, "large")
-    waters = create_water_object(map_number)
-
-    # slaat de lijsten op in de dictionairy
-    all_houses_dic["small"] = small_houses
-    all_houses_dic["medium"] = medium_houses
-    all_houses_dic["large"] = large_houses
-
-    # loop door alle huizen en plaats deze op de meest gunstige plek zodat de waarde van de kaart het hoogst is
-    for house in all_houses_dic["large"]:
-        all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-    for house in all_houses_dic["medium"]:
-        all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-    for house in all_houses_dic["small"]:
-            all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-    
-    return total_value, all_houses_dic, waters
-
-def swapping_houses_algoritme(number_of_houses, map_number, all_houses, waters, total_value_map, algoritme):
-    ''' plaatst de huizen random, en swapt vervolgens de huizen met elkaar om te kijken of
-        dit een hogere waarde zal opleveren (all_houses en waters worden meegegeven voor algoritme nummer 6) '''
-
-    # plaatst de huizen random
-    if algoritme == 4:
-        all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
-
-    # roept het algoritme aan voor het swappen van de huizen
-    for item in all_houses.values():
-        for house in item:
-            all_houses_new, total_value = swap_houses(house=house, all_houses=all_houses, waters=waters, total_value_map=total_value_map)
-        
-        all_houses_dic = copy.deepcopy(all_houses_new)
-
-    return total_value, all_houses_dic, waters
-
-def random_ascending_hillclimber_algoritme(number_of_houses, map_number):
-    ''' plaatst alle huizen op een random locatie, en zoekt dan per huis 10 random nieuwe locaties en kijkt of hiermee de waarde van de map te verhogen is '''
-
-    # plaatst alle huizen op een random locatie
-    all_houses, total_value, waters = random_algoritme(number_of_houses, map_number)
-
-    # roept random hillclimber aan, deze pakt een bestaand huis, en kijkt voor 10 nieuwe punten wat de beste plek zou zijn om dit huis te plaatsen
-    for item in all_houses.values():
-        for house in item:
-            all_houses_new, total_value = random_ascending_hillclimber(house=house, all_houses=all_houses, waters=waters, total_value_map=total_value)
-    all_houses_dic = copy.deepcopy(all_houses_new)
-    
-    return total_value, all_houses_dic, waters
-
-def swap_houses_after_greedy_algoritme(number_of_houses, map_number, all_houses, waters, total_value_map, algoritme):
-
-        # bepaal de verdeling van de huizen
-        number_small, number_medium, number_large = ratio_houses(number_of_houses)
-
-        # creeert lijsten met objecten van de juiste grootte
-        small_houses = create_house_object(number_small, "small")
-        medium_houses = create_house_object(number_medium, "medium")
-        large_houses = create_house_object(number_large, "large")
-        waters = create_water_object(map_number)
-
-        # slaat de lijsten op in de dictionairy
-        all_houses_dic["small"] = small_houses
-        all_houses_dic["medium"] = medium_houses
-        all_houses_dic["large"] = large_houses
-
-        # loop door alle huizen en plaats deze op de meest gunstige plek volgens het greedy algoritme
-        for house in all_houses_dic["large"]:
-            all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-        for house in all_houses_dic["medium"]:
-            all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-        for house in all_houses_dic["small"]:
-            all_houses_dic, total_value = greedy_algoritme(house, all_houses_dic, waters)
-
-        # swap de huizen om een hogere totale waarde te krijgen
-        for item in all_houses_dic.values():
-            for house in item:
-                all_houses_new, total_value = swap_houses(house=house, all_houses=all_houses_dic, waters=waters, total_value_map=total_value, algoritme=0)
-
-        for item in all_houses_new.values():
-            for house in item:
-                all_houses, total_value = swap_houses(house=house, all_houses=all_houses_dic, waters=waters, total_value_map=total_value, algoritme=algoritme)
-            
-        all_houses_dic = copy.deepcopy(all_houses)
-    
-        return total_value, all_houses_dic, waters

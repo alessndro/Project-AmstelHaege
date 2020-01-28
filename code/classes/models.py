@@ -1,3 +1,12 @@
+#########################################################################
+# classes.py
+#
+# Minor Programming 
+#
+# Kiara Evers, Alessandro Degenkamp, Daniel Siha
+#
+# Bevat alle classes die worden gebruikt in dit project
+##########################################################################
 import math
 import time
 

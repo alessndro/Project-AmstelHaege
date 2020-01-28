@@ -1,17 +1,34 @@
+#########################################################################
+# main.py
+#
+# Minor Programming 
+#
+# Kiara Evers, Alessandro Degenkamp, Daniel Siha
+#
+# Bevat hoofdfile om het probleem Amstel-Haege met algoritmes op te lossen
+##########################################################################
+
 from code.classes.models import House, Water
-from code.algoritmes.helpers_functions import *
-from algorithms import random_algoritme, randomizer_algorithm, ascending_hillclimber, greedy_algoritme, swap_houses, random_ascending_hillclimber
-from visualisation import visualisation, visualisation_plot
-from writer import write_progress, write_progress_run
-import math
+from code.visualisation import visualisation, visualisation_plot
+from code.writer import *
+from code.algorithms.hf import *
 import copy
 import time
+from random import seed, random
+
+# importen van alle benodigde algoritmes
+from code.algorithms.random import *
+from code.algorithms.ascending_hillclimber import *
+from code.algorithms.greedy import *
+from code.algorithms.swapping_houses import *
+from code.algorithms.random_points_ascending_hillclimber import *
+from code.algorithms.greedy_swap_turn import *
 
 # importen van benodigde pakketten voor de visualisatie
 import matplotlib.pyplot as plt
 import numpy as np
 
-# constante
+# constanten
 RATIO_SMALL = 0.6
 RATIO_MEDIUM = 0.25
 RATIO_LARGE = 0.15
@@ -21,107 +38,77 @@ WIDTH_LENGTH_SMALL_HOUSE = 8
 
 def main():
 
-    # bepaalde de totale run-time van het programma
-    t = time.time()
-    elap = time.time() - t
+    while True:
 
-    number_of_houses, map_number, algoritme = get_input()
+        number_of_houses, map_number, algoritme = get_input()
 
-    # initialiseer de variabelen die benodigd zijn voor het runnen
-    all_houses_dic = {}
-    total_value_map = 0
-    total_value = 0
-    waters = []
-    count = 0
+        # initialiseer de variabelen die benodigd zijn voor het runnen
+        all_houses_dic = {}
+        all_houses = {}
+        total_value_map = 0
+        total_value = 0
+        waters = []
+        count = 0
 
-    # RANDOM
-    if algoritme == 1:
-        while True:
-            turns = int(input("Uit hoeveel keer wil je dat er een random gemaakt wordt? Enkel de gene met de hoogste waarde wordt weergeven"))
-            if turns > 0:
-                break
-        total_value, all_houses_dic, waters = random(number_of_houses=number_of_houses, map_number=map_number, turns=turns)
+        # RANDOM
+        if algoritme == 1:
+            while True:
+                turns = int(input("Uit hoeveel keer wil je dat er een random gemaakt wordt? Enkel de gene met de hoogste waarde wordt weergeven. \n"))
+                if turns > 0:
+                    break
+            total_value, all_houses_dic, waters = random_start(number_of_houses=number_of_houses, map_number=map_number, turns=turns)
 
-    # ASCENDING HILLCLIMBER
-    if algoritme == 2:
-        total_value, all_houses_dic, waters = asceding_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters = waters, total_value_map=total_value_map)
+        # bepaalde de totale run-time van het programma
+        t = time.time()
+        elap = time.time() - t
 
-    # VOOR GREEDY
-    if algoritme == 3:
-        total_value, all_houses_dic, waters = greedy(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map)
+        # ASCENDING HILLCLIMBER
+        if algoritme == 2:
+            total_value, all_houses_dic, waters = asceding_hillclimber_algoritme(number_of_houses=number_of_houses,
+            map_number=map_number, all_houses=all_houses, waters = waters, total_value_map=total_value_map)
 
-    # VOOR SWAPPING HOUSES
-    if algoritme == 4:    
-        total_value, all_houses_dic, waters = swapping_houses_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
+        # VOOR GREEDY
+        if algoritme == 3:
+            total_value, all_houses_dic, waters = greedy(number_of_houses=number_of_houses,
+            map_number=map_number, waters=waters, total_value_map=total_value_map)
 
-    # VOOR DOUBLE RANDOM 
-    if algoritme == 5:
-        total_value, all_houses_dic, waters = random_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number)
+        # VOOR SWAPPING HOUSES
+        if algoritme == 4:    
+            total_value, all_houses_dic, waters = swapping_houses_algoritme(number_of_houses=number_of_houses,
+            map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
 
-    # SWAP HOUSES NA GREEDY
-    if algoritme == 6:
-        total_value, all_houses_dic, waters = swap_houses_after_greedy_algoritme(number_of_houses=number_of_houses, map_number=map_number, all_houses=all_houses, waters=waters, total_value_map=total_value_map, algoritme=algoritme)
+        # VOOR DOUBLE RANDOM 
+        if algoritme == 5:
+            total_value, all_houses_dic, waters = random_points_ascending_hillclimber_algoritme(number_of_houses=number_of_houses, map_number=map_number)
+
+        # SWAP HOUSES NA GREEDY
+        if algoritme == 6:
+            total_value, all_houses_dic, waters = swap_houses_after_greedy_algoritme(number_of_houses=number_of_houses, map_number=map_number,
+            waters=waters, total_value_map=total_value_map, algoritme=algoritme)
         
-
-    # visualisatie 
-    visualisation_map()
-    
-    visualisation(all_houses=all_houses_dic, waters=waters) 
-    elap = time.time() - t
-    visualisation_plot()
-
-    # toont het resultaat van het programma
-    print("TOTAL VALUE MAP: ",total_value)
-    print("RUN TIME: ", elap)
-    
-    
-
-def algoritme4(house, all_houses, waters, total_value_map):
-    total_value_map_NEW = total_value_map
-     
-    rangex = MAXIMUM_WIDTH - house.length
-    rangey = MAXIMUM_HEIGHT - house.width
-    
-    for i in range(-5,5):
-        for j in range(-5,5):
+        # noteert de resultaten
+        write_progress(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value, all_houses=all_houses_dic)
+        if algoritme != 1:
+            write_progress_run(number_of_houses=number_of_houses, map_number=map_number, total_value_map=total_value)
 
         
-            checkx = house.bottom_left[0] + i
-            checky = house.bottom_left[1] + j
+        elap = time.time() - t
+        # visualisatie 
+        visualisation(all_houses=all_houses_dic, waters=waters) 
+        visualisation_plot(algoritme)
 
-            if checkx >= 0 and checky >= 0:
-                if checkx <= rangex and checky <= rangey:
+        delete_progress_run()
 
-                    tempx = house.bottom_left[0]
-                    tempy = house.bottom_left[1]
-                    # save cordinates house.bottom_left
-                    bottom_left = (checkx,checky)
-                    # change cordinates of bl to new location
-                    house.location(bottom_left)
-                    # if you can place house on new location
+        # toont het resultaat van het programma
+        print("TOTAL VALUE MAP: ",total_value)
+        print("RUN TIME: ", elap)
 
-                    if place_house(house, all_houses, waters) == True:
-                        # bereken nieuw waarde map, waarin huis is verplaatst
-                        total_value_map_temp = 0
-                        for item in all_houses.values():
-                            for house in item:
-                                house.extra_meters()
-                                total_value_map_temp += house.totalprice()
-
-                        # als waarde met nieuwe locatie hoger is, verander deze
-                        if total_value_map_NEW < total_value_map_temp:
-                            total_value_map_NEW = total_value_map_temp
-                        # als waarde niet hoger is verander naar oude locatie
-                        else:
-                            bottom_left = (tempx,tempy)
-                            house.location(bottom_left)
-                    else:
-                        bottom_left = (tempx,tempy)
-                        house.location(bottom_left)
-
-    return all_houses, total_value_map_NEW
-    
-    
+        beeindigen = int(input("Om het programma opnieuw te runnen toets 1, indien u niet verder gaat met het programma" + 
+                            " wordt process_run.csv geleegd. Wanneer u wel verder gaat wordt deze verder aangevuld. \n"))
+        if beeindigen != 1:
+            delete_progress_run()
+            break
+        
 if __name__ == "__main__":
     main()
 
