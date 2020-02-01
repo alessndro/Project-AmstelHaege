@@ -77,6 +77,10 @@ Project Link: [https://github.com/alessndro/Project-AmstelHaege](https://github.
 
 Mochten we nog meer tijd hebben om verder te gaan met dit project dan zullen wij ons richten op een simulated annealing algoritme dat ook slechtere waardes accepteerd, om vervolgens bij het plaatsen van de volgende huizen op een hogere totale waarde uit te kunnen komen.
 
+## Presentatie
+
+https://docs.google.com/presentation/d/1HMSgAilYRYJZvusnZIH4lHxPe2EN9QiIuvYK7AZfuT4/edit?usp=sharing
+
 ## Licensie
 
 Copyright 2020 alle rechten voorbehouden.
